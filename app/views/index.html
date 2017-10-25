@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<! Template taken from https://codepen.io/colorlib/full/rxddKy>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../public/style.css">
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../public/login.js"></script>
+</head>
+
+<body>
+  <div class="login-page">
+  <div class="form">
+    <h3 style="margin-bottom: 40px">HRMS Login</h3>
+    <p>You are a ... </p>
+    <form style="margin-bottom: 10px">
+      <label class="radio-inline">
+        <input type="radio" name="optradio">Admin
+      </label>
+      <label class="radio-inline" >
+        <input type="radio" name="optradio">Candidate
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio">Recruiter
+      </label>
+    </form>
+    <form class="login-form">
+      <input type="text" placeholder="username"/>
+      <input type="password" placeholder="password"/>
+      <button type="button" onclick="login()">login</button>
+    </form>
+  </div>
+</div>
+
+
+</body>
+</html>

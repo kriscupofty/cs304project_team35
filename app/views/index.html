@@ -18,18 +18,18 @@
     <p>You are a ... </p>
     <form style="margin-bottom: 10px">
       <label class="radio-inline">
-        <input type="radio" name="optradio">Admin
+        <input type="radio" name="optradio" value="admin">Admin
       </label>
       <label class="radio-inline" >
-        <input type="radio" name="optradio">Candidate
+        <input type="radio" name="optradio" value="candidate">Candidate
       </label>
       <label class="radio-inline">
-        <input type="radio" name="optradio">Recruiter
+        <input type="radio" name="optradio" value="recruiter">Recruiter
       </label>
     </form>
     <form class="login-form">
-      <input type="text" placeholder="username"/>
-      <input type="password" placeholder="password"/>
+      <input id="email" type="text" placeholder="username"/>
+      <input id="password" type="password" placeholder="password"/>
       <button type="button" onclick="login()">login</button>
     </form>
   </div>

@@ -21,13 +21,13 @@ app.use('/public', express.static('./public'));
 app.use(require('body-parser').json());
 
 // Admin login endpoint
-app.post('/login/admin', function (req, res) {
+app.post('/login/admin', function (req, res) {  // request
     if (!req.body.email || !req.body.pw) {
         res.status(400).send('Login failed: please enter all fields.');
     } else {
         connection.query('SELECT email, pw from Admin where email=? ',
-            [req.body.email],
-            function(err, rows) {
+            [req.body.email],           // using the placeholder value
+            function(err, rows) {       // rows will contain the results of query.
                 if (err) {
                     console.log(err);
                     res.status(400).send('login failed');
@@ -46,6 +46,59 @@ app.post('/login/admin', function (req, res) {
 });
 
 //Todo: login endpoints for Recruiter and ResidencyCandidate
+// for candidate
+app.post('/login/candidate', function (req, res) {  // request
+    if (!req.body.email || !req.body.pw) {
+        res.status(400).send('Login failed: please enter all fields.');
+    } else {
+        connection.query('SELECT email, pw from Admin where email=? ',
+            [req.body.email],           // using the placeholder value
+            function(err, rows) {       // rows will contain the results of query.
+                if (err) {
+                    console.log(err);
+                    res.status(400).send('login failed');
+                } else {
+                    if(rows.length == 0){
+                        res.status(401).send('Login failed: Username does not exist.');
+                    }
+                    else if(rows[0].pw == req.body.pw){
+                        req.session.role = 'admin';
+                        res.status(200).send("logged in as admin!");
+                    }
+                    else res.status(401).send('Login failed: Username does not match password.');
+                }
+            });
+    }
+});
+
+
+// for recruiter
+app.post('/login/recruiter', function (req, res) {  // request
+    if (!req.body.email || !req.body.pw) {
+        res.status(400).send('Login failed: please enter all fields.');
+    } else {
+        connection.query('SELECT email, pw from Admin where email=? ',
+            [req.body.email],           // using the placeholder value
+            function(err, rows) {       // rows will contain the results of query.
+                if (err) {
+                    console.log(err);
+                    res.status(400).send('login failed');
+                } else {
+                    if(rows.length == 0){
+                        res.status(401).send('Login failed: Username does not exist.');
+                    }
+                    else if(rows[0].pw == req.body.pw){
+                        req.session.role = 'admin';
+                        res.status(200).send("logged in as admin!");
+                    }
+                    else res.status(401).send('Login failed: Username does not match password.');
+                }
+            });
+    }
+});
+
+
+
 
 var adminAuth = function(req, res, next) {
     if (req.session && req.session.role == 'admin')

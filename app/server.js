@@ -54,17 +54,18 @@ app.post('/login/:role', function (req, res) {  // request
 
 
 
-var adminAuth = function(req, res, next) {
-    if (req.session && req.session.role == 'Admin')
+var auth = function(req, res, next) {
+    //console.log(req.url);
+    var role = req.url.split("/")[1];
+    if (req.session && req.session.role == role)
         return next();
     else
         return res.status(401).send('Unauthenticated request');
 };
-// Todo: create auth middleware functions for Recruiter and ResidencyCandidate
 
 
 // admin setupinterview endpoint
-app.post('/admin/setupinterview', adminAuth, function (req, res) {
+app.post('/admin/setupinterview', auth, function (req, res) {
     // do queries
 
 

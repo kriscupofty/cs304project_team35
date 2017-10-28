@@ -18,6 +18,21 @@ async.waterfall([
                 else callback(null);
             }
         );
+    },
+    function (callback) {
+        connection.query( // TODO: add the hospital table and add foreign key constraint here
+            `CREATE TABLE Recruiter (
+                name varchar(30),
+                email varchar(30),
+                pw varchar(30),
+                hID char(6) NOT NULL,
+                PRIMARY KEY(email)
+            )`,
+            function (err, result) {
+                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
+                else callback(null);
+            }
+        );
     }
 
 ], function (err, result) {

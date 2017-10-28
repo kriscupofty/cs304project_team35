@@ -31,7 +31,7 @@
   font-weight: bold;
   text-transform: uppercase;
   outline: 0;
-  background: #f2d7fd;
+  background: rgba(26, 255, 245, 0.62);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -42,7 +42,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #f2d7fd;
+  background: #c7b6f5;
 }
 
 .container {
@@ -79,11 +79,11 @@
   color: #EF3B3A;
 }
 body {
-  background: rgba(255, 246, 86, 0.42); /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, rgba(255, 246, 86, 0.42), rgba(255, 246, 86, 0.42));
-  background: -moz-linear-gradient(right, rgba(255, 246, 86, 0.42), rgba(255, 246, 86, 0.42));
-  background: -o-linear-gradient(right, rgba(255, 246, 86, 0.42), rgba(255, 246, 86, 0.42));
-  background: linear-gradient(to left, rgba(255, 246, 86, 0.42), rgba(255, 246, 86, 0.42));
+  background: rgba(255, 246, 85, 0.56); /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, rgba(255, 246, 86, 0.56), rgba(255, 246, 86, 0.56));
+  background: -moz-linear-gradient(right, rgba(255, 246, 86, 0.56), rgba(255, 246, 86, 0.56));
+  background: -o-linear-gradient(right, rgba(255, 246, 86, 0.56), rgba(255, 246, 86, 0.56));
+  background: linear-gradient(to left, rgba(255, 246, 86, 0.56), rgba(255, 246, 86, 0.56));
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      

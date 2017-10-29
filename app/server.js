@@ -11,13 +11,13 @@ require('./init-db'); // Todo: create all tables and populate them
 
 app.use(session({
     secret: 'yekterces',
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 
 app.set('views', './views');
-app.use(express.static('./views'));
-app.use('/public', express.static('./public'));
+app.use('/', express.static(__dirname + '/views'));
+app.use('/public', express.static(__dirname + '/public'));
 app.use(require('body-parser').json());
 
 // Admin login endpoint
@@ -78,6 +78,13 @@ app.post('/admin/setupinterview', auth, function (req, res) {
 app.get('/logout', function (req, res) {
     req.session.destroy();
     res.send("/index.html");
+});
+
+app.get('/isloggedin/:role', function (req, res) {
+    if (req.session && req.session.role == req.params.role)
+        return res.status(200).send('Logged in');
+    else
+        return res.status(401).send('Not loggied in');
 });
 
 app.listen(1234);

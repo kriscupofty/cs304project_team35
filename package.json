@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "app/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kriscupofty/cs304project_team35.git"
+  },
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.18.2",
@@ -15,5 +19,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

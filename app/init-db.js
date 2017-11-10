@@ -21,7 +21,7 @@ async.waterfall([
         connection.query(
             `create table Hospital (
 	            hID	       int(11) unsigned auto_increment,
-                name       varchar(30),
+                name       varchar(30) not null,
                 location   varchar(30),
                 primary key (hID)
             )`,
@@ -33,27 +33,10 @@ async.waterfall([
     },
     function (callback) {
         connection.query(
-            `create table Program (
-	            hID	       int(11) unsigned,
-                pname      varchar(30),
-                numslots   integer,
-                primary key (hID, pname),
-                foreign key (hID) references Hospital(hID)
-                on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
             `create table Recruiter (
-                name				varchar(30) not null,
-	            hID	       			int(11) unsigned not null,
-                email      varchar(30),
+                name				    varchar(30) not null,
+	             hID	       			int(11) unsigned not null,
+                email               varchar(30),
                 phone        		varchar(30) unique,
                 pw       			varchar(30) not null,
                 primary key (email),
@@ -73,31 +56,13 @@ async.waterfall([
 	            postingID		int(11) unsigned auto_increment,
                 recruiterEmail	varchar(30) not null,
                 pname           varchar(50) not null,
+                numslots		integer,
                 duration        varchar(30) not null,
                 specialty       varchar(50) not null,
                 deadline		date not null,
-                    primary key (postingID),
+                primary key (postingID),
                 foreign key (recruiterEmail) references Recruiter(email)
 	            on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table RecruiterHospital (
-                recruiterEmail	varchar(30),
-                hID          	int(11) unsigned not null,
-                primary key (recruiterEmail),
-                foreign key (recruiterEmail) references Recruiter(email)
-                on delete cascade
-                on update cascade,
-	            foreign key (hID) references Hospital(hID)
-                on delete cascade
                 on update cascade
             )`,
             function (err, result) {
@@ -115,6 +80,7 @@ async.waterfall([
                 email           varchar(30),
                 phone             varchar(30) unique,
                 pw               varchar(30) not null,
+                documentPath    	varchar(30),
                 primary key (email)
             )`,
             function (err, result) {
@@ -126,33 +92,16 @@ async.waterfall([
     function (callback) {
         connection.query(
             `create table Application (
-	            aID		int(11) unsigned auto_increment,
-                form1path	varchar(30) not null,
-                form2path	varchar(30) not null,
-                primary key (aID)
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table Applies (
-	            resEmail	varchar(30),
-                postingID	int(11) unsigned,
+	            aID			int(11) unsigned auto_increment,
+	            resEmail	varchar(30) not null,
+                postingID	int(11) unsigned not null,
                 time        date,
-                aID			int(11) unsigned not null,
-                primary key (resEmail, postingID, time),
+                primary key (aID),
                 foreign key (resEmail) references ResidencyCandidate(email)
                 on delete cascade
                 on update cascade,
                 foreign key (postingID) references VacancyPosting(postingID)
                 on delete cascade
-                on update cascade,
-                foreign key (aID) references Application(aID)
-                on delete cascade
                 on update cascade
             )`,
             function (err, result) {
@@ -163,36 +112,17 @@ async.waterfall([
     },
     function (callback) {
         connection.query(
-            `create table Interviews (
-	            round		integer,
-	            resEmail      varchar(30),
-                postingID	int(11) unsigned,
+            `create table Interview (
+	            intvID		int(11) unsigned auto_increment,
+	            resEmail      varchar(30) not null,
+                aID			int(11) unsigned not null,
                 time        date not null,
                 location    varchar(30) not null,
-                primary key (round, resEmail,postingID),
-	            foreign key (postingID) references VacancyPosting(postingID)
+                primary key (intvID),
+	            foreign key (aID) references Application(aID)
                 on delete cascade
                 on update cascade,
                 foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table H_interviews_for_posting (
-                postingID	int(11) unsigned,
-                hID      int(11) unsigned not null,
-                primary key (postingID),
-	            foreign key (postingID) references VacancyPosting(postingID)
-                on delete cascade
-                on update cascade,
-                foreign key (hID) references Hospital(hID)
                 on delete cascade
                 on update cascade
             )`,
@@ -222,7 +152,13 @@ async.waterfall([
             `create table CandidateAttended (
 	            resEmail        varchar(30),
 	            sid				int(11) unsigned,
-                primary key (resEmail,sid)
+                primary key (resEmail,sid),
+	            foreign key (resEmail) references ResidencyCandidate(email)
+                on delete cascade
+                on update cascade,
+	            foreign key (sid) references School(sid)
+                on delete no action
+                on update cascade
             )`,
             function (err, result) {
                 if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
@@ -273,43 +209,16 @@ async.waterfall([
     function (callback) {
         connection.query(
             `create table Offers (
-                postingID		int(11) unsigned,
-	            resEmail		varchar(30),
-	            hID				int(11) unsigned,
-                decision		varchar(30) not null,
-                primary key (postingID,resEmail),
+                oID		int(11) unsigned auto_increment,
+	            resEmail		varchar(30) not null,
+                intvID		int(11) unsigned not null,
+                decision		varchar(30),
+                primary key (oID),
                 foreign key (resEmail) references ResidencyCandidate(email)
                 on delete cascade
                 on update cascade,
-                foreign key (postingID) references VacancyPosting(postingID)
+	            foreign key (intvID) references Interview(intvID)
 	            on delete cascade
-                on update cascade,
-                foreign key (hID) references Hospital(hID)
-	            on delete set null
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table Contract (
-                postingID		int(11) unsigned,
-	            resEmail		varchar(30),
-	            hID				int(11) unsigned,
-                compensation	numeric(9,2) not null,
-                primary key (postingID,resEmail),
-                foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade,
-                foreign key (postingID) references VacancyPosting(postingID)
-	            on delete cascade
-                on update cascade,
-                foreign key (hID) references Hospital(hID)
-	            on delete set null
                 on update cascade
             )`,
             function (err, result) {

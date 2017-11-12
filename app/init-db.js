@@ -21,7 +21,7 @@ async.waterfall([
         connection.query(
             `create table Hospital (
 	            hID	       int(11) unsigned auto_increment,
-                name       varchar(30) not null,
+                name       varchar(30) unique not null,
                 location   varchar(30),
                 primary key (hID)
             )`,

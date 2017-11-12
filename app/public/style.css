@@ -40,6 +40,7 @@
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+  margin-top: 10px;
 }
 .form button:hover,.form button:active,.form button:focus {
   background: #c7b6f5;

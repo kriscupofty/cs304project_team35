@@ -68,6 +68,41 @@ app.get('/isloggedin/:role', function (req, res) {
         return res.status(401).send('Not loggied in');
 });
 
+// registration endpoint
+app.post('/register/:role', function (req, res) {  // request
+    var role = req.params.role, query, data;
+    function insertData(query,data) {
+        connection.query(query,data,function(err, rows) {
+            if (err) {
+                console.log(err);
+                res.status(400).send('Sign up failed');
+            } else {
+                res.status(200).send('Sign up successfully');
+            }
+        });
+    }
+    if(role == 'admin') {
+        query = 'INSERT INTO Admin VALUES (?,?,?,?)';
+        data = [req.body.name, req.body.email, req.body.phone, req.body.pw];
+        insertData(query,data);
+    } else if(role == 'recruiter') {
+        connection.query("SELECT hID from Hospital where name=?",[req.body.hosp],
+            function(err, rows) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send('hospital query failed');
+                } else {
+                    data = [req.body.name,rows[0].hID,req.body.email, req.body.phone, req.body.pw];
+                    query = 'INSERT INTO Recruiter VALUES (?,?,?,?,?)';
+                    insertData(query,data);
+                }});
+    } else {
+        data = [req.body.name,req.body.spec,req.body.empl,req.body.email,req.body.phone, req.body.pw];
+        query = 'INSERT INTO ResidencyCandidate VALUES (?,?,?,?,?,?)';
+        insertData(query,data);
+    }
+});
+
 app.listen(1234);
 console.log("app running at http://localhost:1234");
 

@@ -47,6 +47,7 @@ app.post('/login/:role', function (req, res) {  // request
                     }
                     else if(rows[0].pw == req.body.pw){
                         req.session.role = role;
+                        req.session.email = req.body.email;
                         res.status(200).send("Logged in as" + role);
                     }
                     else res.status(401).send('Login failed: Username does not match password.');

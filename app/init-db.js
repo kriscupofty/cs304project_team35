@@ -21,7 +21,7 @@ async.waterfall([
         connection.query(
             `create table Hospital (
 	            hID	       int(11) unsigned auto_increment,
-                name       varchar(30) unique not null,
+                name       varchar(30) not null,
                 location   varchar(30),
                 primary key (hID)
             )`,
@@ -175,46 +175,6 @@ async.waterfall([
                 on update cascade,
 	            foreign key (postingID) references VacancyPosting(postingID)
 	            on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table H_rank (
-                hID		int(11) unsigned,
-                resEmail	varchar(30),
-                rank		integer not null,
-                primary key (hID, resEmail),
-                foreign key (hID) references Hospital(hID)
-                on delete cascade
-                on update cascade,
-                foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table R_rank (
-                resEmail	varchar(30),
-	            hID		int(11) unsigned,
-                rank		integer not null,
-                primary key (resEmail,hID),
-                foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade,
-                foreign key (hID) references Hospital(hID)
-                on delete cascade
                 on update cascade
             )`,
             function (err, result) {

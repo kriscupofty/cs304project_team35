@@ -244,64 +244,6 @@ module.exports = function () {
                     else callback(null);
                 }
             );
-        },
-        function (callback) {
-            connection.query(
-                `
-                insert into H_rank  values(3,'mark@gmail.com', 2); 
-                insert into H_rank  values(4,'mark@gmail.com', 1); 
-                insert into H_rank  values(5,'dan@gmail.com', 1); 
-                insert into H_rank  values(1,'dan@gmail.com', 1); 
-                insert into H_rank  values(8,'susan@gmail.com', 1);
-                insert into H_rank  values(2,'jason@gmail.com', 1);
-                insert into H_rank  values(6,'ama@gmail.com', 1);
-                insert into H_rank  values(3,'ama@gmail.com', 1);
-                insert into H_rank  values(9,'linda@gmail.com', 1);
-                insert into H_rank  values(3,'jasmine@gmail.com', 1);
-                insert into H_rank  values(1,'kristy@gmail.com', 1);
-                insert into H_rank  values(7,'meng@gmail.com', 1);
-                insert into H_rank  values(10,'terry@gmail.com', 1);
-                insert into H_rank  values(10,'jack@gmail.com', 2);
-                insert into H_rank  values(3,'gary@gmail.com', 1); 
-                insert into H_rank  values(4,'gary@gmail.com', 2); 
-                insert into H_rank  values(7,'lisa@gmail.com', 2);
-                insert into H_rank  values(8,'joe@gmail.com', 2);
-    
-                `,
-                function (err, result) {
-                    if (err && err.code !== 'ER_DUP_KEY' && err.code !== 'ER_DUP_ENTRY') callback(err);
-                    else callback(null);
-                }
-            );
-        },
-        function (callback) {
-            connection.query(
-                `
-                insert into R_rank  values('mark@gmail.com', 3, 1); 
-                insert into R_rank  values('mark@gmail.com', 4, 2); 
-                insert into R_rank  values('dan@gmail.com', 5, 1); 
-                insert into R_rank  values('dan@gmail.com', 1, 2); 
-                insert into R_rank  values('susan@gmail.com', 8, 1);
-                insert into R_rank  values('jason@gmail.com', 2, 1);
-                insert into R_rank  values('ama@gmail.com', 6, 1);
-                insert into R_rank  values('ama@gmail.com', 3, 2);
-                insert into R_rank  values('linda@gmail.com', 9, 1);
-                insert into R_rank  values('jasmine@gmail.com', 3, 1);
-                insert into R_rank  values('kristy@gmail.com', 1, 1);
-                insert into R_rank  values('meng@gmail.com', 7, 1);
-                insert into R_rank  values('terry@gmail.com', 10, 1);
-                insert into R_rank  values('jack@gmail.com', 10, 1);
-                insert into R_rank  values('gary@gmail.com', 4, 1); 
-                insert into R_rank  values('gary@gmail.com', 3, 2); 
-                insert into R_rank  values('lisa@gmail.com', 7, 1);
-                insert into R_rank  values('joe@gmail.com', 8, 1);
-    
-                `,
-                function (err, result) {
-                    if (err && err.code !== 'ER_DUP_KEY' && err.code !== 'ER_DUP_ENTRY') callback(err);
-                    else callback(null);
-                }
-            );
         }
     ], function (err, result) {
         if (err) {

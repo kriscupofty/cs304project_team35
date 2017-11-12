@@ -164,7 +164,7 @@ async.waterfall([
     },
     function (callback) {
         connection.query(
-            `create table Offers (
+            `create table Offer (
                 postingID		int(11) unsigned not null,
 	            resEmail		varchar(30) not null,
                 compensation	numeric(9,2),

@@ -223,19 +223,19 @@ module.exports = function () {
         function (callback) {
             connection.query(
                 `
-                insert into Offers  values(4, 'mark@gmail.com', 55000, 'accepted'); 
-                insert into Offers  values(5, 'dan@gmail.com', 52000, 'accepted'); 
-                insert into Offers  values(11, 'dan@gmail.com', 61000, 'declined'); 
-                insert into Offers  values(8, 'susan@gmail.com', 57000, 'accepted');
-                insert into Offers  values(2, 'jason@gmail.com', 58000, 'accepted');
-                insert into Offers  values(6, 'ama@gmail.com', 55500, 'accepted');
-                insert into Offers  values(12, 'ama@gmail.com', 50000, 'declined');
-                insert into Offers  values(9, 'linda@gmail.com', 53200, 'accepted');
-                insert into Offers  values(3, 'jasmine@gmail.com', 56000, 'accepted');
-                insert into Offers  values(1, 'kristy@gmail.com', 53000, 'accepted');
-                insert into Offers  values(7, 'meng@gmail.com', 55000, 'accepted');
-                insert into Offers  values(10, 'terry@gmail.com', 58000, 'accepted');
-                insert into Offers  values(13, 'gary@gmail.com', 59000, 'accepted');  
+                insert into Offer  values(4, 'mark@gmail.com', 55000, 'accepted'); 
+                insert into Offer  values(5, 'dan@gmail.com', 52000, 'accepted'); 
+                insert into Offer  values(11, 'dan@gmail.com', 61000, 'declined'); 
+                insert into Offer  values(8, 'susan@gmail.com', 57000, 'accepted');
+                insert into Offer  values(2, 'jason@gmail.com', 58000, 'accepted');
+                insert into Offer  values(6, 'ama@gmail.com', 55500, 'accepted');
+                insert into Offer  values(12, 'ama@gmail.com', 50000, 'declined');
+                insert into Offer  values(9, 'linda@gmail.com', 53200, 'accepted');
+                insert into Offer  values(3, 'jasmine@gmail.com', 56000, 'accepted');
+                insert into Offer  values(1, 'kristy@gmail.com', 53000, 'accepted');
+                insert into Offer  values(7, 'meng@gmail.com', 55000, 'accepted');
+                insert into Offer  values(10, 'terry@gmail.com', 58000, 'accepted');
+                insert into Offer  values(13, 'gary@gmail.com', 59000, 'accepted');  
 
 
                 `,

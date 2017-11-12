@@ -36,7 +36,7 @@ function signup() {
       contentType: "text/html; charset=utf-8",
       type: "GET",
       success: function(res) {
-          window.location.href = "http://localhost:1234/signUp.html";
+          window.location.href = "http://localhost:1234/register.html";
       },
       error: function (err) {
           console.log(err);

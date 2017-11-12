@@ -37,12 +37,28 @@
             </li>
         </ul>
             <span class="nav-item my-2 my-lg-0">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="logout()">Log out</button>
+                <button id='log' class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="logout()">Log out</button>
             </span>
-
 
     </div>
 </nav>
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Analytics</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Export</a>
+        </li>
+    </ul>
+</nav>
+
 <main role="main" class="container">
     <h2>Dashboard</h2><hr>
 

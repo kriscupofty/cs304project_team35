@@ -182,6 +182,46 @@ async.waterfall([
                 else callback(null);
             }
         );
+    },
+    function (callback) {
+        connection.query(
+            `create table H_rank (
+                hID		int(11) unsigned,
+                resEmail	varchar(30),
+                 rank		integer not null,
+                 primary key (hID, resEmail),
+                 foreign key (hID) references Hospital(hID)
+                 on delete cascade
+                on update cascade,
+                 foreign key (resEmail) references ResidencyCandidate(email)
+                 on delete cascade
+                 on update cascade
+             )`,
+            function (err, result) {
+                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
+                else callback(null);
+            }
+        );
+    },
+    function (callback) {
+        connection.query(
+            `create table R_rank (
+                 resEmail	varchar(30),
+ 	            hID		int(11) unsigned,
+                 rank		integer not null,
+                 primary key (resEmail,hID),
+                 foreign key (resEmail) references ResidencyCandidate(email)
+                 on delete cascade
+                 on update cascade,
+                 foreign key (hID) references Hospital(hID)
+                 on delete cascade
+                 on update cascade
+             )`,
+            function (err, result) {
+                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
+                else callback(null);
+            }
+        );
     }
 
 ], function (err, result) {
@@ -190,5 +230,5 @@ async.waterfall([
         return;
     }
     console.log('Database Tables have been created');
-   require('./seed-db.js')();
+    require('./seed-db.js')();
 });

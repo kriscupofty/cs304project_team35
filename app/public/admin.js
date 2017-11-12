@@ -5,8 +5,9 @@ $(document).ready(function () {
         url: "http://localhost:1234/isloggedin/admin",
         contentType: "application/json; charset=utf-8",
         type: "GET",
-        success: function (res) {
+        success: function () {
             $('main.container').toggle();
+            displayOffers();
         },
         error: function (err) {
             $('#log').text('Log in');
@@ -15,8 +16,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 
 function setUpInterview() {
         var data = {}; //Todo: get actually data from the user
@@ -33,5 +32,29 @@ function setUpInterview() {
                 alert(err.responseText);
             }
         });
-    }
+}
 
+function displayOffers() {
+    $.ajax({
+        url: "http://localhost:1234/admin/offers",
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (res) {
+            $('#offer_table').bootstrapTable({
+                columns: [{field: 'name', title: 'Resident'},
+                          {field: 'resEmail', title: 'Resident Email'},
+                    {field: 'postingID', title: 'Posting ID'},
+                    {field: 'hID', title: 'Hospital ID'},
+                    {field: 'hospital', title: 'Hospital'},
+                    {field: 'recruiterEmail', title: 'Recruiter Email'},
+                    {field: 'compensation', title: 'Compensation'},
+                    {field: 'decision', title: 'Decision'}],
+                data: res
+            })
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
+}

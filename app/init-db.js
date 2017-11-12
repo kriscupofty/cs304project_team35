@@ -222,6 +222,18 @@ async.waterfall([
                 else callback(null);
             }
         );
+    },
+    function (callback) {
+        connection.query(
+            `CREATE VIEW OfferForAdmin (name, resEmail, postingID, hID, hospital, recruiterEmail, compensation, decision) AS 
+                SELECT R.name, O.resEmail, O.postingID, Rec.hID, H.name, recruiterEmail, compensation, decision
+                FROM Offer O, VacancyPosting V, Recruiter Rec, ResidencyCandidate R, Hospital H
+                WHERE O.resEmail = R.email AND O.postingID = V.postingID AND Rec.hID = H.hID AND Rec.email = V.recruiterEmail`,
+            function (err, result) {
+                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
+                else callback(null);
+            }
+        );
     }
 
 ], function (err, result) {

@@ -20,9 +20,6 @@ app.use('/', express.static(__dirname + '/views'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use(require('body-parser').json());
 
-// Include all Routes
-require('./routes/routes')(app);
-
 // Admin login endpoint
 app.post('/login/:role', function (req, res) {  // request
   if (!req.body.email || !req.body.pw) {
@@ -53,7 +50,6 @@ app.post('/login/:role', function (req, res) {  // request
         }
       });
     }
-<<<<<<< HEAD
   });
 
   // registration endpoint
@@ -128,24 +124,3 @@ app.post('/login/:role', function (req, res) {  // request
     console.log("app running at http://localhost:1234");
 
     module.exports.getApp = app;
-=======
-});
-
-// Logout endpoint
-app.get('/logout', function (req, res) {
-    req.session.destroy();
-    res.send("/index.html");
-});
-
-app.get('/isloggedin/:role', function (req, res) {
-    if (req.session && req.session.role == req.params.role)
-        return res.status(200).send('Logged in');
-    else
-        return res.status(401).send('Not loggied in');
-});
-
-app.listen(1234);
-console.log("app running at http://localhost:1234");
-
-module.exports.getApp = app;
->>>>>>> f30279ce5c0baad21ab7686a8e108952d28ed0b8

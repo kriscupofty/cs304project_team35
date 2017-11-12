@@ -7,7 +7,7 @@ const connection = require('./connection');
 const app = express(),
     session = require('express-session');
 
-require('./init-db'); // Todo: create all tables and populate them
+require('./init-db');
 
 app.use(session({
     secret: 'yekterces',
@@ -19,6 +19,9 @@ app.set('views', './views');
 app.use('/', express.static(__dirname + '/views'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use(require('body-parser').json());
+
+// Include all Routes
+require('./routes/routes')(app);
 
 // Admin login endpoint
 app.post('/login/:role', function (req, res) {  // request
@@ -51,28 +54,6 @@ app.post('/login/:role', function (req, res) {  // request
             });
     }
 });
-
-
-
-var auth = function(req, res, next) {
-    //console.log(req.url);
-    var role = req.url.split("/")[1];
-    if (req.session && req.session.role == role)
-        return next();
-    else
-        return res.status(401).send('Unauthenticated request');
-};
-
-
-// admin setupinterview endpoint
-app.post('/admin/setupinterview', auth, function (req, res) {
-    // do queries
-
-
-    res.status(200).send('Interview set up successfully!');
-});
-
-//Todo: other endpoints for queries we expect our app to be able to do
 
 // Logout endpoint
 app.get('/logout', function (req, res) {

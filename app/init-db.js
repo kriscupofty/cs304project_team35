@@ -80,7 +80,6 @@ async.waterfall([
                 email           varchar(30),
                 phone             varchar(30) unique,
                 pw               varchar(30) not null,
-                documentPath    	varchar(30),
                 primary key (email)
             )`,
             function (err, result) {
@@ -95,6 +94,7 @@ async.waterfall([
 	            aID			int(11) unsigned auto_increment,
 	            resEmail	varchar(30) not null,
                 postingID	int(11) unsigned not null,
+                docPath		varchar(30),
                 time        date,
                 primary key (aID),
                 foreign key (resEmail) references ResidencyCandidate(email)
@@ -113,16 +113,12 @@ async.waterfall([
     function (callback) {
         connection.query(
             `create table Interview (
-	            intvID		int(11) unsigned auto_increment,
-	            resEmail      varchar(30) not null,
-                aID			int(11) unsigned not null,
+	            round		int(11) unsigned,
+                aID			int(11) unsigned,
                 time        date not null,
                 location    varchar(30) not null,
-                primary key (intvID),
+                primary key (aID,round),
 	            foreign key (aID) references Application(aID)
-                on delete cascade
-                on update cascade,
-                foreign key (resEmail) references ResidencyCandidate(email)
                 on delete cascade
                 on update cascade
             )`,
@@ -168,56 +164,16 @@ async.waterfall([
     },
     function (callback) {
         connection.query(
-            `create table H_ranks (
-                hID		int(11) unsigned,
-                resEmail	varchar(30),
-                rank		integer not null,
-                primary key (hID, resEmail),
-                foreign key (hID) references Hospital(hID)
-                on delete cascade
-                on update cascade,
-                foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
-            `create table R_ranks (
-                resEmail	varchar(30),
-	            hID		int(11) unsigned,
-                rank		integer not null,
-                primary key (resEmail,hID),
-                foreign key (resEmail) references ResidencyCandidate(email)
-                on delete cascade
-                on update cascade,
-                foreign key (hID) references Hospital(hID)
-                on delete cascade
-                on update cascade
-            )`,
-            function (err, result) {
-                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
-                else callback(null);
-            }
-        );
-    },
-    function (callback) {
-        connection.query(
             `create table Offers (
-                oID		int(11) unsigned auto_increment,
+                postingID		int(11) unsigned not null,
 	            resEmail		varchar(30) not null,
-                intvID		int(11) unsigned not null,
+                compensation	numeric(9,2),
                 decision		varchar(30),
-                primary key (oID),
+                primary key (resEmail,postingID,compensation),
                 foreign key (resEmail) references ResidencyCandidate(email)
                 on delete cascade
                 on update cascade,
-	            foreign key (intvID) references Interview(intvID)
+	            foreign key (postingID) references VacancyPosting(postingID)
 	            on delete cascade
                 on update cascade
             )`,
@@ -234,5 +190,5 @@ async.waterfall([
         return;
     }
     console.log('Database Tables have been created');
-    require('./seed-db.js')();
+   require('./seed-db.js')();
 });

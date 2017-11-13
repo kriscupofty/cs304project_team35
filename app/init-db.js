@@ -94,7 +94,7 @@ async.waterfall([
 	            aID			int(11) unsigned auto_increment,
 	            resEmail	varchar(30) not null,
                 postingID	int(11) unsigned not null,
-                docPath		varchar(30),
+                docPath		varchar(50),
                 time        date,
                 primary key (aID),
                 foreign key (resEmail) references ResidencyCandidate(email)

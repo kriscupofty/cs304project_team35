@@ -15,21 +15,34 @@ $(document).ready(function () {
 
         }
     });
+
+    $(".nav-link").on("click", function(){
+        $(".nav-link.active").removeClass("active");
+        $(this).addClass("active");
+    });
 });
 
 function setUpInterview() {
-        var data = {}; //Todo: get actually data from the user
+    var round = $('#round').val(), aID = $('#aID').val(), time = $('#time').val(), location = $('#loc').val();
+    if(round == null || aID == null || time == null || location == null)
+        return alert('Please enter all fields.');
+
+    var data = [parseInt(round), parseInt(aID), time, location];
         $.ajax({
             url: "http://localhost:1234/admin/setupinterview",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(data),
+            data: JSON.stringify({values: data}),
             type: "POST",
-            success: function (res) {
-                alert(res);
+            success: function () {
+                alert("Interview set up successfully.");
             },
             error: function (err) {
-                console.log(err);
-                alert(err.responseText);
+                //console.log(err);
+                if (err.responseJSON.errno == 1462)
+                    return alert("Please enter a valid aID.");
+                else if (err.responseJSON.errno == 1062)
+                    return alert("Interview already set up.");
+                else return alert(err.responseJSON.code);
             }
         });
 }
@@ -50,11 +63,11 @@ function displayOffers() {
                     {field: 'compensation', title: 'Compensation'},
                     {field: 'decision', title: 'Decision'}],
                 data: res
-            })
+            });
         },
         error: function (err) {
             console.log(err);
         }
     });
-
 }
+

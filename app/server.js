@@ -7,7 +7,7 @@ const connection = require('./connection');
 const app = express(),
     session = require('express-session');
 
-require('./init-db');
+//require('./init-db');
 
 app.use(session({
     secret: 'yekterces',

@@ -8,6 +8,7 @@ $(document).ready(function () {
         success: function () {
             $('main.container').toggle();
             displayOffers();
+            displayMPC();
         },
         error: function (err) {
             $('#log').text('Log in');
@@ -69,5 +70,25 @@ function displayOffers() {
             console.log(err);
         }
     });
+}
+
+function displayMPC() {
+    $.ajax({
+        url: "http://localhost:1234/admin/mpc",
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (res) {
+            $('#mpc_table').bootstrapTable({
+                columns: [{field: 'resEmail', title: 'Email'},
+                    {field: 'name', title: 'Name'},
+                    {field: 'Average_rank', title: 'Average Rank'}],
+                data: res
+            });
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
 }
 

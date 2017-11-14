@@ -31,7 +31,7 @@
   font-weight: bold;
   text-transform: uppercase;
   outline: 0;
-  background: rgba(26, 255, 245, 0.62);
+  background: rgba(26, 49, 255, 0.27);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -43,7 +43,7 @@
   margin-top: 10px;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #c7b6f5;
+  background: rgba(26, 255, 245, 0.62);
 }
 
 .container {

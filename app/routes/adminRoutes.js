@@ -8,15 +8,63 @@ module.exports = function (app) {
 
     // admin setupinterview endpoint
     app.post('/admin/setupinterview', auth, function (req, res) {
-        // do queries
-
-
-        res.status(200).send('Interview set up successfully!');
+        var values = req.body.values;
+        connection.query('insert into Interview values(?, ?, ?, ?)', values,
+            function (err, json) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(json);
+                }
+            });
     });
 
     app.get('/admin/offers', auth, function (req, res) {
         connection.query('select * from OfferForAdmin',
-            function(err, rows) {
+            function (err, rows) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
+    });
+
+    //most preferred candidate(s)
+    app.get('/admin/mpc', auth, function (req, res) {
+        connection.query(`select * 
+                          from (select resEmail, name, sum(rank)/count(*) as Average_rank 
+                                from H_rank HR, ResidencyCandidate C where HR.resEmail = C.email group by resEmail) S 
+                          group by resEmail, name, Average_rank 
+                          having Average_rank = 
+                                    (select min(Average_rank) 
+                                     from (select sum(rank)/count(*) as Average_rank from H_rank HR group by resEmail) M)`,
+            function (err, rows) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
+    })
+
+    //most preferred hospital(s)
+    app.get('/admin/mph', auth, function (req, res) {
+        connection.query(`select *
+                          from (select H.hID, name, sum(rank)/count(*) as Average_rank
+                                from R_rank RR, Hospital H
+                                where RR.hID = H.hID
+                                group by hID) S
+                          group by hID, name, Average_rank 
+                          having Average_rank = 
+                                (select min(Average_rank) 
+                                 from (select sum(rank)/count(*) as Average_rank
+                                       from R_rank RR
+                                       group by hID) M)`,
+            function (err, rows) {
                 if (err) {
                     console.log(err);
                     res.status(400).send(err);

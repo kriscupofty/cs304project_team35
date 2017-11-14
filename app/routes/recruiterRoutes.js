@@ -5,6 +5,19 @@ const connection = require('../connection');
 
 module.exports = function (app) {
     var auth = require('./auth.js').auth;
-    //Todo
+
+    // Recruiter post vacancy endpoint
+    app.post('/recruiter/postVacancy', auth, function (req, res) {
+        var values = req.body.values;
+        connection.query('insert into VacancyPosting (recruiterEmail,pname,duration,specialty,deadline,numslots) values(?, ?, ?, ?, ?, ?)', values,
+            function (err, json) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(json);
+                }
+            });
+    });
 
 }

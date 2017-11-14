@@ -98,7 +98,7 @@ module.exports = function () {
                 insert into ResidencyCandidate  values('Susan', 'Neurology', 'employed', 'susan@gmail.com', '778647283','affds'); 
                 insert into ResidencyCandidate  values('Jason', 'Dermatology', 'employed', 'jason@gmail.com', '7782548237','iamjason'); 
                 insert into ResidencyCandidate  values('Ama', 'Internal Medicine', 'employed', 'ama@gmail.com', '7785879032','iamama'); 
-                insert into ResidencyCandidate  values('Linda', 'Neurosurgery', 'employed', 'linda@gmail.com', '77825786902','iamlinda,'); 
+                insert into ResidencyCandidate  values('Linda', 'Neurosurgery', 'employed', 'linda@gmail.com', '77825786902','iamlinda'); 
                 insert into ResidencyCandidate  values('Jasmine', 'Emergency Medicine', 'employed', 'jasmine@gmail.com', '7785647849','iamjasmine'); 
                 insert into ResidencyCandidate  values('Kristy', 'Anesthesiology', 'employed', 'kristy@gmail.com', '7785678598','iamkristy'); 
                 insert into ResidencyCandidate  values('Mengmeng', 'Interventional Radiology', 'employed', 'meng@gmail.com', '7784657482','iammengmeng'); 

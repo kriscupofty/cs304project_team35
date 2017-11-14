@@ -34,12 +34,12 @@ module.exports = function (app) {
 
     //most preferred candidate(s)
     app.get('/admin/mpc', auth, function (req, res) {
-        connection.query(`select * 
-                          from (select resEmail, name, sum(rank)/count(*) as Average_rank 
-                                from H_rank HR, ResidencyCandidate C where HR.resEmail = C.email group by resEmail) S 
-                          group by resEmail, name, Average_rank 
-                          having Average_rank = 
-                                    (select min(Average_rank) 
+        connection.query(`select *
+                          from (select resEmail, name, sum(rank)/count(*) as Average_rank
+                                from H_rank HR, ResidencyCandidate C where HR.resEmail = C.email group by resEmail) S
+                          group by resEmail, name, Average_rank
+                          having Average_rank =
+                                    (select min(Average_rank)
                                      from (select sum(rank)/count(*) as Average_rank from H_rank HR group by resEmail) M)`,
             function (err, rows) {
                 if (err) {
@@ -58,9 +58,9 @@ module.exports = function (app) {
                                 from R_rank RR, Hospital H
                                 where RR.hID = H.hID
                                 group by hID) S
-                          group by hID, name, Average_rank 
-                          having Average_rank = 
-                                (select min(Average_rank) 
+                          group by hID, name, Average_rank
+                          having Average_rank =
+                                (select min(Average_rank)
                                  from (select sum(rank)/count(*) as Average_rank
                                        from R_rank RR
                                        group by hID) M)`,
@@ -73,5 +73,18 @@ module.exports = function (app) {
                 }
             });
     })
+
+    // admin add offer endpoint
+    app.post('/admin/addoffer', auth, function (req, res) {
+      connection.query('insert into Offer values(?, ?, ?, ?)', req.body.values,
+      function (err, json) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(json);
+        }
+      });
+    });
 
 }

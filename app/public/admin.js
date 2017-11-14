@@ -23,6 +23,7 @@ $(document).ready(function () {
     });
 });
 
+
 function setUpInterview() {
     var round = $('#round').val(), aID = $('#aID').val(), time = $('#time').val(), location = $('#loc').val();
     if (round == null || aID == null || time == null || location == null)
@@ -112,3 +113,25 @@ function displayMPH() {
     })
 }
 
+function addOffer() {
+    var postID = $('#postID').val(), resEmail = $('#resEmail').val(), comp = $('#comp').val(), decs = $('#decs option:selected').text();
+    if (postID == '' || resEmail == '' || comp == '' || $("#decs option:selected").val() === " ")
+        return alert('Please enter all fields.');
+    var data = [parseInt(postID), resEmail, parseInt(comp), decs];
+    $.ajax({
+        url: "http://localhost:1234/admin/addoffer",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({values: data}),
+        type: "POST",
+        success: function () {
+            alert("Succesfully added an offer to " + resEmail + " for postingID"+ postID );
+        },
+        error: function (err) {
+          if (err.responseJSON.errno == 1452)
+              return alert("Please enter an existing postingID and candidate email address.");
+          else if (err.responseJSON.errno == 1062)
+              return alert("Offer already exists.");
+          else return alert(err.responseJSON.code);
+        }
+    });
+}

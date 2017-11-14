@@ -26,6 +26,13 @@
     <script src="../public/login.js"></script>
 
 </head>
+<style>
+    .section {
+        padding-top: 65px;
+        margin-top: -65px;
+        margin-bottom: 25px;
+    }
+</style>
 
 <body>
 <nav style="background-color: #32cfaf" class="navbar navbar-expand-md navbar-light fixed-top">
@@ -53,16 +60,16 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="#overview" data-toggle="tab">Overview <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="#overview">Overview <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#jobPosting" data-toggle="tab">Jobs</a>
+            <a class="nav-link" href="#jobPosting">Jobs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#personalInfo" data-toggle="tab">Profile</a>
+            <a class="nav-link" href="#profile">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#application" data-toggle="tab">Applications</a>
+            <a class="nav-link" href="#application">Applications</a>
         </li>
     </ul>
 </nav>
@@ -71,17 +78,20 @@
 
 
 <main role="main" class="container">
-<<<<<<< HEAD
 
-    <div id="overview" lass="section">
+    <div id="overview" class="section">
         <h3>Overview</h3><hr>
-        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+    </div>
+
+    <div id="jobPosting" class="section">
+        <h3>Jobs</h3><hr>
+        <table id="jobs_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
         </table>
     </div>
 
-    <div id="profile" lass="section">
+    <div id="profile" class="section">
         <h3>Profile</h3><hr>
-        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+        <table id="pro_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
             <thead>
                 <tr>
                 <th>Firstname</th>
@@ -97,23 +107,11 @@
                 </tr>
             </tbody>
         </table>
-    </div> 
-
-    <div id="jobPosting" lass="section">
-        <h3>Jobs</h3><hr>
-        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
-        </table>
-    </div> 
+    </div>
     
     <div id='application' class="section">
         <h3>Applications</h3><hr>
-        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
-=======
-    <h2>Dashboard</h2><hr>
-    <div id="intv_div" class="section">
-        <h3>Interview Notice</h3><hr>
-        <table id="intv_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5" data-search='true'>
->>>>>>> origin/master
+        <table id="app_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
         </table>
     </div>
 

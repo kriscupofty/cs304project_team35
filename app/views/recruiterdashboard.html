@@ -51,7 +51,7 @@
             <a class="nav-link" href="#addPosting">Add Job Postings</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Analytics</a>
+            <a class="nav-link" href="#deletePosting">Delete Job Postings</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Export</a>
@@ -66,17 +66,18 @@
     </div>
         <div id="addPosting">
             <h3>Add Vacancy Posting</h3><hr>
+            <h5>Please fill in the following items</h5>
             <form class="form">
-                 <div class="card" style="width: 20rem;">
+                 <div class="card" style="width: 35rem;">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"> Program name
                         <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
                     </li>
-                    <li class="list-group-item"> Required specialty
-                        <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
-                    </li>
                     <li class="list-group-item"> Duration
                         <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
+                    </li>
+                    <li class="list-group-item"> Required specialty
+                        <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
                     </li>
                     <li class="list-group-item"> Application deadline
                         <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
@@ -92,6 +93,20 @@
 
             </form>
         </div>
+
+        
+        <div id="deletePosting" style="margin-top: 80px">
+            <h5>Please enter the posting ID</h5>
+
+            <div class="card" style="width: 35rem">
+              <div class="card-body"> Posting ID
+                <input class="form-control requiredField" id="postingID" name="pID" placeholder="Posting ID">
+              </div>
+            </div>
+
+            <button style="margin-top:20px; margin-left:50px;" type="button" onclick="deleteVacancy()" class="btn btn-primary">Delete a vacancy posting</button>
+        </div>
+
     </div>
 </main>
 

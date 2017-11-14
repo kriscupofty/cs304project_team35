@@ -48,7 +48,7 @@
             <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
+            <a class="nav-link" href="#addPosting">Add Job Postings</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Analytics</a>
@@ -60,42 +60,46 @@
 </nav>
 
 <main role="main" class="container">
-    <h2>Dashboard</h2><hr>
+    <h2>Overview</h2><hr>
     <div id='intv_div' class="section">
-        <h3>Add Vacancy Posting</h3><hr>
-       
-</div>
-        <form class="form">
-             <div class="card" style="width: 20rem;">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"> Enter Your email 
-                    <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
-                </li>
-                <li class="list-group-item"> Program name
-                    <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
-                </li>
-                <li class="list-group-item"> Required specialty
-                    <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
-                </li>
-                <li class="list-group-item"> Duration
-                    <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
-                </li>
-                <li class="list-group-item"> Application deadline
-                    <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
-                </li>
-                <li class="list-group-item"> Number of slots available (optional)
-                    <input style="" class="form-control requiredField" id="slots" name="slots" placeholder="">
-                </li>
-              </ul>
-        <form class="form">
-            </div>
-            
-            <button type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>
-
-        </form>
+      
     </div>
+        <div id="addPosting">
+            <h3>Add Vacancy Posting</h3><hr>
+            <form class="form">
+                 <div class="card" style="width: 20rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Enter Your email 
+                        <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
+                    </li>
+                    <li class="list-group-item"> Program name
+                        <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
+                    </li>
+                    <li class="list-group-item"> Required specialty
+                        <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
+                    </li>
+                    <li class="list-group-item"> Duration
+                        <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
+                    </li>
+                    <li class="list-group-item"> Application deadline
+                        <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
+                    </li>
+                    <li class="list-group-item"> Number of slots available
+                        <input style="" class="form-control requiredField" id="slots" name="slots" placeholder="">
+                    </li>
+                  </ul>
+                </div>
+            <form class="form">
+                
+            <button style="margin-top:20px; margin-left:50px" type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>
 
+            </form>
+        </div>
+    </div>
 </main>
+
+
+
 <footer class="footer">
     <div class="container">
         <span class="text-muted">Hospital-Resident Matching Service</span>

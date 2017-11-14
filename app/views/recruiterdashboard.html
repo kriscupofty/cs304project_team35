@@ -68,9 +68,6 @@
         <form class="form">
              <div class="card" style="width: 20rem;">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Enter your email
-                    <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
-                </li>
                 <li class="list-group-item"> Enter Your email 
                     <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
                 </li>
@@ -84,12 +81,13 @@
                     <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
                 </li>
                 <li class="list-group-item"> Application deadline
-                     <input style="" class="form-control requiredField" id="ddl" name="ddl" placeholder="YYYY-MM-DD">
+                    <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
                 </li>
                 <li class="list-group-item"> Number of slots available (optional)
                     <input style="" class="form-control requiredField" id="slots" name="slots" placeholder="">
                 </li>
               </ul>
+        <form class="form">
             </div>
             
             <button type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>

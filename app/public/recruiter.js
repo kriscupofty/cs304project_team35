@@ -21,16 +21,16 @@ $(document).ready(function () {
 });
 
 function postVacancy() {
-    var email = $('#email').val(), pname = $('#pname').val(), dur = $('#dur').val();
+    var pname = $('#pname').val(), dur = $('#dur').val();
     var spec = $('#spec').val(), ddl = $('#ddl').val(), slots = $('#slots').val();
-    if(email == null || pname == null || dur == null || spec == null || ddl == null)
+    if(pname == '' || dur == '' || spec == '' || ddl == '')
         return alert('Please enter all required fields.');
 
-    var data = [email, pname, dur, spec, ddl, parseInt(slots)];
+    var data = {pname: pname, dur:dur, spec:spec, ddl:ddl, slots:parseInt(slots)};
         $.ajax({
             url: "http://localhost:1234/recruiter/postVacancy",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({values: data}),
+            data: JSON.stringify(data),
             type: "POST",
             success: function () {
                 alert("Successfully posted vacancy for a program!");

@@ -115,7 +115,7 @@ async.waterfall([
             `create table Interview (
 	            round		int(11) unsigned,
                 aID			int(11) unsigned,
-                time        date not null,
+                time        datetime not null,
                 location    varchar(30) not null,
                 primary key (aID,round),
 	            foreign key (aID) references Application(aID)

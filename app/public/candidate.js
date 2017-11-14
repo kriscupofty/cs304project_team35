@@ -27,7 +27,7 @@ function displayAS(){
       contentType: "application/json; charset=utf-8",
       type: "GET",
       success: function (res) {
-          $('#intv_table').bootstrapTable({
+          $('#app_table').bootstrapTable({
               columns: [{field: 'postingID', title: 'Applied Posting ID'},
                   {field: 'hname', title: 'Hospital Name'},
                   {field: 'pname', title: 'Program Name'},

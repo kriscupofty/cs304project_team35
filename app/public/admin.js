@@ -43,6 +43,8 @@ function setUpInterview() {
                 return alert("Please enter a valid aID.");
             else if (err.responseJSON.errno == 1062)
                 return alert("Interview already set up.");
+            else if(err.responseJSON.code == 'ER_TRUNCATED_WRONG_VALUE')
+                return alert("Please enter interview time in the correct format.");
             else return alert(err.responseJSON.code);
         }
     });

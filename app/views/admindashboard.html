@@ -24,9 +24,6 @@
     <script src="../public/logout.js"></script>
 </head>
 <style>
-    .form-group {
-        margin-right: 10px;
-    }
 
     .control-label {
         margin-right: 5px;
@@ -97,27 +94,26 @@
     <div id='intv_div' class="section">
         <h3>Add Interview</h3><hr>
         <form class="form-inline">
-            <div style="margin-right: -80px" class="form-group">
+            <div style="margin-right: -100px" class="form-group">
                 <label class="control-label">round</label>
-                <input style="width: 40%" class="form-control requiredField" id="round" name="round" placeholder="e.g. 3">
+                <input style="width: 30%" class="form-control requiredField" id="round" name="round" placeholder="e.g. 3">
             </div>
-            <div style="margin-right: -90px" class="form-group">
+            <div style="margin-right: -85px" class="form-group">
                 <label class="control-label">aID</label>
                 <input style="width: 40%" class="form-control requiredField" id="aID" name="aID" placeholder="">
             </div>
-            <div style="margin-right: -40px" class="form-group">
+            <div style="margin-right: 17px" class="form-group">
                 <label class="control-label">time</label>
-                <input style="width: 60%" class="form-control requiredField" id="time" name="time" placeholder="YYYY-MM-DD">
+                <input style="width: 200px" class="form-control requiredField" id="time" name="time" placeholder="YYYY-MM-DD HH:MM:SS">
             </div>
             <div class="form-group">
                 <label class="control-label">location</label>
-                <input style="width: 390px" class="form-control requiredField" id="loc" name="loc" placeholder="">
-            </div>
-
-            <div class="form-group">
-                <button type="button" onclick="setUpInterview()" class="btn btn-primary">Add Record</button>
+                <input style="width: 430px" class="form-control requiredField" id="loc" name="loc" placeholder="">
             </div>
         </form>
+        <div class="form-group" style="margin-top: 15px">
+            <button type="button" onclick="setUpInterview()" class="btn btn-primary">Add Record</button>
+        </div>
     </div>
     <div id='a_div' class="section">
         <h3>Analytics</h3><hr>

@@ -63,35 +63,37 @@
     <h2>Dashboard</h2><hr>
     <div id='intv_div' class="section">
         <h3>Add Vacancy Posting</h3><hr>
-        <form class="form-inline">
-            <div style="margin-right: -20px" class="form-group">
-                <label class="control-label">your email</label>
-                <input style="width: 60%" class="form-control requiredField" id="email" name="email" placeholder="your username">
+       
+</div>
+        <form class="form">
+             <div class="card" style="width: 20rem;">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Enter your email
+                    <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
+                </li>
+                <li class="list-group-item"> Enter Your email 
+                    <input style="" class="form-control requiredField" id="email" name="email" placeholder="your username">
+                </li>
+                <li class="list-group-item"> Program name
+                    <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
+                </li>
+                <li class="list-group-item"> Required specialty
+                    <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
+                </li>
+                <li class="list-group-item"> Duration
+                    <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
+                </li>
+                <li class="list-group-item"> Application deadline
+                     <input style="" class="form-control requiredField" id="ddl" name="ddl" placeholder="YYYY-MM-DD">
+                </li>
+                <li class="list-group-item"> Number of slots available (optional)
+                    <input style="" class="form-control requiredField" id="slots" name="slots" placeholder="">
+                </li>
+              </ul>
             </div>
-            <div style="margin-right: -20px" class="form-group">
-                <label class="control-label">program name</label>
-                <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
-            </div>
-            <div style="margin-right: 0px" class="form-group">
-                <label class="control-label">duration</label>
-                <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
-            </div>
-            <div style="margin-right: 0px" class="form-group">
-                <label class="control-label">required specialty</label>
-                <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
-            </div>
-            <div style="margin-right: 0px" class="form-group">
-                <label class="control-label">application deadline</label>
-                <input style="" class="form-control requiredField" id="ddl" name="ddl" placeholder="YYYY-MM-DD">
-            </div>
-            <div style="margin-right: 0px" class="form-group">
-                <label class="control-label">number of slots available (optional)</label>
-                <input style="" id="slots" name="slots" placeholder="">
-            </div>
+            
+            <button type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>
 
-            <div class="form-group">
-                <button type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>
-            </div>
         </form>
     </div>
 

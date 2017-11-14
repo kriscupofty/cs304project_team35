@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('main.container').toggle();
     $.ajax({
-        url: "http://localhost:1234/isloggedin/admin",
+        url: "http://localhost:1234/isloggedin/candidate",
         contentType: "application/json; charset=utf-8",
         type: "GET",
         success: function (res) {

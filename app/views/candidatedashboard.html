@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../public/dashboard.css">
     <script src="../public/candidate.js"></script>
     <script src="../public/logout.js"></script>
+    <script src="../public/login.js"></script>
 
 </head>
 
@@ -48,23 +49,62 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="#overview" data-toggle="tab">Overview <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
+            <a class="nav-link" href="#jobPosting" data-toggle="tab">Jobs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Analytics</a>
+            <a class="nav-link" href="#personalInfo" data-toggle="tab">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Export</a>
+            <a class="nav-link" href="#application" data-toggle="tab">Applications</a>
         </li>
     </ul>
 </nav>
 
 
+
+
 <main role="main" class="container">
-    <h2>Dashboard</h2><hr>
+
+    <div id="overview" lass="section">
+        <h3>Overview</h3><hr>
+        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+        </table>
+    </div>
+
+    <div id="profile" lass="section">
+        <h3>Profile</h3><hr>
+        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+            <thead>
+                <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td id="fName"></td>
+                <td id="lName"></td>
+                <td id="Email"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+
+    <div id="jobPosting" lass="section">
+        <h3>Jobs</h3><hr>
+        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+        </table>
+    </div> 
+    
+    <div id='application' class="section">
+        <h3>Applications</h3><hr>
+        <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
+        </table>
+    </div>
 
 </main>
 

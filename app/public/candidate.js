@@ -8,6 +8,7 @@ $(document).ready(function () {
             $('main.container').toggle();
             displayAS();
             displayProfile();
+            displayApplication();
         },
         error: function (err) {
             $('#log').text('Log in');
@@ -29,7 +30,8 @@ function displayAS(){
       type: "GET",
       success: function (res) {
           $('#intv_table').bootstrapTable({
-              columns: [{field: 'postingID', title: 'Applied Posting ID'},
+              columns: [
+                  {field: 'postingID', title: 'Applied Posting ID'},
                   {field: 'hname', title: 'Hospital Name'},
                   {field: 'pname', title: 'Program Name'},
                   {field: 'duration', title: 'Program Duration'},
@@ -55,11 +57,35 @@ function displayProfile() {
     success: function(res) {
       $('#profile_table').bootstrapTable({
         columns: [
-          {field:'name', title: 'Name'},
-          {field:'email', title: 'Email'},
-          {field:'phone', title: 'Phone', editable: true},
-          {field:'specialty', title: 'Specialty', editable: true,},
-          {field:'employmentStatus', title: 'Employment Status', editable: true,},
+            {field:'name', title: 'Name'},
+            {field:'email', title: 'Email'},
+            {field:'phone', title: 'Phone', editable: true},
+            {field:'specialty', title: 'Specialty', editable: true},
+            {field:'employmentStatus', title: 'Employment Status', editable: true}
+        ],
+        data: res
+      });
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  });  
+}
+
+function displayApplication() {
+  $.ajax({
+    url: "http://localhost:1234/candidate/application",
+    contentType: "application/json; charset=utf-8",
+    type: "GET",
+    success: function(res) {
+      $('#app_table').bootstrapTable({
+        columns: [
+            {field: 'postingID', title: 'Applied Posting ID'},
+            {field: 'name', title: 'Hospital Name'},
+            {field: 'pname', title: 'Program Name'},
+            {field: 'duration', title: 'Program Duration'},
+            {field: 'specialty', title: 'Required Sepcialty'},
+            {field: 'time', title: 'Date Submitted'}
         ],
         data: res
       });

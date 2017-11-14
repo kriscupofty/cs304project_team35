@@ -225,10 +225,22 @@ async.waterfall([
     },
     function (callback) {
         connection.query(
-            `CREATE VIEW OfferForAdmin (name, resEmail, postingID, hID, hospital, recruiterEmail, compensation, decision) AS 
+            `CREATE VIEW OfferForAdmin (name, resEmail, postingID, hID, hospital, recruiterEmail, compensation, decision) AS
                 SELECT R.name, O.resEmail, O.postingID, Rec.hID, H.name, recruiterEmail, compensation, decision
                 FROM Offer O, VacancyPosting V, Recruiter Rec, ResidencyCandidate R, Hospital H
                 WHERE O.resEmail = R.email AND O.postingID = V.postingID AND Rec.hID = H.hID AND Rec.email = V.recruiterEmail`,
+            function (err, result) {
+                if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
+                else callback(null);
+            }
+        );
+    },
+    function (callback) {
+        connection.query(
+            `CREATE VIEW ApplIntv (resEmail, postingID, hname, pname, duration, specialty, deadline, intvRound, intvTime, intvLoc) AS (
+                SELECT a.resEmail, a.postingID, h.name, v.pname, v.duration, v.specialty, v.deadline, i.round, i.time, i.location
+                FROM Interview i, Application a, VacancyPosting v, Recruiter r, Hospital h
+                WHERE i.aID = a.aID AND a.postingID = v.postingID AND v.recruiterEmail = r.email AND r.hID = h.hID);`,
             function (err, result) {
                 if (err && err.code !== 'ER_TABLE_EXISTS_ERROR') callback(err);
                 else callback(null);

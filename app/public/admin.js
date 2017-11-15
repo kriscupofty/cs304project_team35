@@ -6,6 +6,7 @@ $(document).ready(function () {
         type: "GET",
         success: function () {
             $('main.container').toggle();
+            displayChart();
             displayOffers();
             displayMPC();
             displayMPH();
@@ -134,4 +135,35 @@ function addOffer() {
           else return alert(err.responseJSON.code);
         }
     });
+}
+
+function displayChart() {
+    $.ajax({
+        url: "http://localhost:1234/admin/offer_rates",
+        contentType: "application/json; charset=utf-8",
+        type: "GET",
+        success: function (res) {
+            var array = res.map((r) => {return [r.decision, r.count]});
+
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Decision');
+                data.addColumn('number', 'Count');
+                data.addRows(array);
+
+                var options = {
+                    pieHole: 0.25
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('offer_rates'));
+                chart.draw(data, options);
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
 }

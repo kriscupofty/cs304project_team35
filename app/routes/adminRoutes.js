@@ -49,7 +49,7 @@ module.exports = function (app) {
                     res.status(200).send(rows);
                 }
             });
-    })
+    });
 
     //most preferred hospital(s)
     app.get('/admin/mph', auth, function (req, res) {
@@ -72,7 +72,7 @@ module.exports = function (app) {
                     res.status(200).send(rows);
                 }
             });
-    })
+    });
 
     // admin add offer endpoint
     app.post('/admin/addoffer', auth, function (req, res) {
@@ -85,6 +85,20 @@ module.exports = function (app) {
           res.status(200).send(json);
         }
       });
+    });
+
+    app.get('/admin/offer_rates', auth, function (req, res) {
+        connection.query(`select decision, count(*) as count
+                          from Offer
+                          group by decision`,
+            function (err, rows) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
     });
 
 }

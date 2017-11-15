@@ -20,6 +20,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
     <link rel="stylesheet" href="../public/dashboard.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script src="../public/admin.js"></script>
     <script src="../public/logout.js"></script>
 </head>
@@ -88,13 +91,14 @@
     <h2 >Dashboard</h2><hr>
     <div id="off_div" class="section">
         <h3>Offers</h3><hr>
+        <div id="offer_rates" style="margin: -16px 0"></div>
         <table id="offer_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5" data-search='true'>
         </table>
-        <h3> Add an offer</h3>
+        <h3 style="margin-top: 20px">Add an offer</h3>
           <form class="form-inline">
               <div style="margin-right: -90px" class="form-group">
                   <label class="control-label">Posting ID</label>
-                  <input type="number" min="1" step="1" style="width: 30%" class="form-control requiredField" id="postID" name="postID" placeholder="integer">
+                  <input type="number" min="1" step="1" style="width: 31%" class="form-control requiredField" id="postID" name="postID" placeholder="integer">
               </div>
               <div style="margin-right:20px" class="form-group">
                   <label class="control-label">Candidate email</label>
@@ -102,7 +106,7 @@
               </div>
               <div style="margin-right: 10px" class="form-group">
                   <label class="control-label">Compensation</label>
-                  <input type="number" min="0" step="0.01" style="width: 80px" class="form-control requiredField" id="comp" name="comp" placeholder="50000">
+                  <input type="number" min="0" step="0.01" style="width: 83px" class="form-control requiredField" id="comp" name="comp" placeholder="50000">
               </div>
               <div class="form-group">
                   <label class="control-label">Decision</label>

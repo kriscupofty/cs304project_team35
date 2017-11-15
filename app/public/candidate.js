@@ -9,6 +9,7 @@ $(document).ready(function () {
             displayAS();
             displayProfile();
             displayApplication();
+            displayPostings();
         },
         error: function (err) {
             $('#log').text('Log in');
@@ -94,4 +95,29 @@ function displayApplication() {
       console.log(err);
     }
   });  
+}
+
+function displayPostings() {
+  $.ajax({
+    url: "http://localhost:1234/candidate/postings",
+    contentType: "application/json; charset=utf-8",
+    type: "GET",
+    success: function(res) {
+      $('#posting_table').bootstrapTable({
+        columns: [
+            {field: 'name', title: 'Hospital Name'},
+            {field: 'pname', title: 'Program Name'},
+            {field: 'duration', title: 'Program Duration'},
+            {field: 'specialty', title: 'Required Specialty'},
+            {field: 'deadline', title: 'Application Deadline'},
+            {field: 'numslots', title: 'Number of Slots Available'},
+            {field: 'recruiterEmail', title: 'Recruiter Email'}
+        ],
+        data: res
+      });
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  }); 
 }

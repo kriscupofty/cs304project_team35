@@ -55,7 +55,7 @@ function displayPostings() {
         {field: 'duration', title: 'Program Duration'},
         {field: 'specialty', title: 'Sepcialty'},
         {field: 'deadline', title: 'Program Deadline'},
-        {field: 'slots', title: 'Number of Slots Available'}],
+        {field: 'numslots', title: 'Number of Slots Available'}],
         data: res
       });
     },

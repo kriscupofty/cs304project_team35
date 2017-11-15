@@ -44,11 +44,23 @@ module.exports = function (app) {
           console.log(err);
           res.status(400).send(err);
         } else {
-          console.log(rows);
           res.status(200).send(rows);
         }
       });
   });
 
+  // display all postings endpoint
+  app.get('/candidate/postings', auth, function(req, res) {
+    connection.query(`select H.name, pname, duration, specialty, deadline, numslots, recruiterEmail from 
+      VacancyPosting VP, Recruiter R, Hospital H where VP.recruiterEmail = R.email and R.hID = H.hID`,
+      function(err, rows) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(rows);
+        }
+      });
+  });
 
 }

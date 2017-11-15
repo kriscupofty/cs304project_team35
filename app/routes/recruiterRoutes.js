@@ -28,7 +28,6 @@ module.exports = function (app) {
         console.log(err);
         res.status(400).send(err);
       } else {
-        console.log(json);
         res.status(200).send(json);
       }
     });
@@ -74,12 +73,12 @@ module.exports = function (app) {
   function checkIDUpdate(req,res, query,data,msg) {
     connection.query('select * from VacancyPosting where recruiterEmail=? AND postingID=?',
     [req.session.email, req.body.postingID],
-    function (err, json) {
+    function (err, rows) {
       if (err) {
         console.log(err);
         res.status(400).send(err);
       } else {
-        if (json.length===0) {
+        if (rows.length===0) {
           res.status(204).send('Non existing posting ID for this recruiter');
         } else {
           updateInfo(res,query, data, msg);

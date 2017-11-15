@@ -34,7 +34,7 @@
 </style>
 
 <body>
-  <nav style="background-color: #2affff" class="navbar navbar-expand-md navbar-light fixed-top">
+<nav style="background-color: #2affff" class="navbar navbar-expand-md navbar-light fixed-top">
     <a class="navbar-brand" href="#">HRMS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,126 +56,143 @@
 
     </div>
 </nav>
-  <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#profile">Edit Personal Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#addPosting">Add Job Postings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#showPosting">All Postings Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#updatePosting">Update Existing Postings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#viewAppl">View Applications</a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#profile">Edit Personal Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#addPosting">Add Job Postings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#showPosting">All Postings Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#updatePosting">Update Existing Postings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#viewAppl">View Applications</a>
+        </li>
     </ul>
-  </nav>
+</nav>
 
-  <main role="main" class="container">
-    <h2>Overview</h2><hr>
+<main role="main" class="container">
+    <h2>Overview</h2>
+    <hr>
 
-    <div id='profile' style="margin-top:40px;">
-      <h3>Edit Personal Profile</h3>
+    <div id='profile' class="section">
+        <h3>Edit Personal Profile</h3>
     </div>
     <hr>
 
-    <div id="addPosting" style="margin-top:40px;">
-      <h3>Add Vacancy Posting</h3>
-      <form class="form">
-        <div class="card" style="width: 20rem;">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"> Program name
-              <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
-            </li>
-            <li class="list-group-item"> Required specialty
-              <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
-            </li>
-            <li class="list-group-item"> Duration
-              <input style="" class="form-control requiredField" id="dur" name="dur" placeholder="e.g. 3 years">
-            </li>
-            <li class="list-group-item"> Application deadline
-              <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
-            </li>
-            <li class="list-group-item"> Number of slots available (optional)
-              <input  type="number" min="1" step="1" class="form-control requiredField" id="slots" name="slots" placeholder="">
-            </li>
-          </ul>
-        </div>
+    <div id="addPosting" class="section">
+        <h3>Add Vacancy Posting</h3>
         <form class="form">
-
-          <button style="margin-top:20px; margin-left:50px" type="button" onclick="postVacancy()" class="btn btn-primary">Add a new vacancy posting</button>
-
+            <div class="card" style="width: 20rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Program name
+                        <input style="" class="form-control requiredField" id="pname" name="pname" placeholder="">
+                    </li>
+                    <li class="list-group-item"> Required specialty
+                        <input style="" class="form-control requiredField" id="spec" name="spec" placeholder="">
+                    </li>
+                    <li class="list-group-item"> Duration
+                        <input style="" class="form-control requiredField" id="dur" name="dur"
+                               placeholder="e.g. 3 years">
+                    </li>
+                    <li class="list-group-item"> Application deadline
+                        <input type="date" class="form-control requiredField" id="ddl" name="ddl" required>
+                    </li>
+                    <li class="list-group-item"> Number of slots available (optional)
+                        <input type="number" min="1" step="1" class="form-control requiredField" id="slots" name="slots"
+                               placeholder="">
+                    </li>
+                </ul>
+            </div>
         </form>
+        <form class="form">
+            <button style="margin-top:20px; margin-left:50px" type="button" onclick="postVacancy()"
+                    class="btn btn-primary">Add a new vacancy posting
+            </button>
+        </form>
+    </div>
 
-      </div>
-      <hr>
-
-      <div id="showPosting" style="margin-top:40px;">
+    <div id="showPosting" class="section">
         <h3>All Postings Active</h3>
         <table id="post_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5" data-search='true'>
         </table>
-      </div>
+    </div>
 
-      <div id="updatePosting" style="margin-top:40px;">
+    <div id="updatePosting" class="section">
         <form class="form">
-          <h3>Update Existing Posting</h3>
-          <div class="card" style="width: 20rem;">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" style="display:inline-block"> Enter the postingID of the posting you want to edit
-                <input type="number" min="1" step="1" class="form-control requiredField" id="postID" name="postID" placeholder="an integer">
-              </li>
-              <li class="list-group-item">Delete an existing posting
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="deletePosting()" class="btn btn-primary">Delete</button>
-              </li>
+            <h3>Update Existing Posting</h3>
+            <div class="card" style="width: 20rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="display:inline-block"> Enter the postingID of the posting you
+                        want to edit
+                        <input type="number" min="1" step="1" class="form-control requiredField" id="postID"
+                               name="postID" placeholder="an integer">
+                    </li>
+                    <li class="list-group-item">Delete an existing posting
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="deletePosting()"
+                                class="btn btn-primary">Delete
+                        </button>
+                    </li>
 
-              <li class="list-group-item"> Update program name
-                <input type="text" class="form-control requiredField" id="upd_pname" name="upd_pname" placeholder=>
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="updatePname()" class="btn btn-primary">Update</button>
-              </li>
-              <li class="list-group-item"> Update program duration
-                <input style="" class="form-control requiredField" id="upd_dur" name="upd_dur" placeholder="e.g. 3 years">
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateDur()" class="btn btn-primary">Update</button>
-              </li>
-              <li class="list-group-item"> Update specialty
-                <input class="form-control requiredField" id="upd_spec" name="upd_spec">
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateSpec()" class="btn btn-primary">Update</button>
-              </li>
-              <li class="list-group-item"> Update program deadline
-                <input type="date" style="" class="form-control requiredField" id="upd_ddl" name="upd_ddl" placeholder="">
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateDdl()" class="btn btn-primary">Update</button>
-              </li>
-              <li class="list-group-item"> Update number of slots remaining
-                <input type="number" min="1" step="1" style="" class="form-control requiredField" id="upd_slots" name="upd_slots" placeholder="">
-                <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateSlots()" class="btn btn-primary">Update</button>
-              </li>
-            </ul>
+                    <li class="list-group-item"> Update program name
+                        <input type="text" class="form-control requiredField" id="upd_pname" name="upd_pname"
+                               placeholder=>
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="updatePname()"
+                                class="btn btn-primary">Update
+                        </button>
+                    </li>
+                    <li class="list-group-item"> Update program duration
+                        <input style="" class="form-control requiredField" id="upd_dur" name="upd_dur"
+                               placeholder="e.g. 3 years">
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateDur()"
+                                class="btn btn-primary">Update
+                        </button>
+                    </li>
+                    <li class="list-group-item"> Update specialty
+                        <input class="form-control requiredField" id="upd_spec" name="upd_spec">
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateSpec()"
+                                class="btn btn-primary">Update
+                        </button>
+                    </li>
+                    <li class="list-group-item"> Update program deadline
+                        <input type="date" style="" class="form-control requiredField" id="upd_ddl" name="upd_ddl"
+                               placeholder="">
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateDdl()"
+                                class="btn btn-primary">Update
+                        </button>
+                    </li>
+                    <li class="list-group-item"> Update number of slots remaining
+                        <input type="number" min="1" step="1" style="" class="form-control requiredField" id="upd_slots"
+                               name="upd_slots" placeholder="">
+                        <button style="margin-top:20px; margin-left:70px" type="button" onclick="updateSlots()"
+                                class="btn btn-primary">Update
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
 
-          </div>
-          <form class="form">
-
-          </div>
-
-          <div id="viewAppl" style="margin-top:40px;">
-            <h3>View Applications</h3>
-          </div>
-        </main>
+    <div id="viewAppl" class="section">
+        <h3>View Applications</h3>
+    </div>
+</main>
 
 
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Hospital-Resident Matching Service</span>
+    </div>
+</footer>
 
-        <footer class="footer">
-          <div class="container">
-            <span class="text-muted">Hospital-Resident Matching Service</span>
-          </div>
-        </footer>
+</body>
 
-      </body>
-
-      </html>
+</html>

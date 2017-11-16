@@ -89,3 +89,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+
+.radio-inline input[type=radio] {
+  position: relative;
+  margin-left: 0px;
+  margin-bottom: -10px;
+}

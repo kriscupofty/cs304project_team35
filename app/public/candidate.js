@@ -32,11 +32,11 @@ function displayAS(){
       success: function (res) {
           $('#intv_table').bootstrapTable({
               columns: [
-                  {field: 'postingID', title: 'Applied Posting ID'},
+                  {field: 'postingID', title: 'Posting ID'},
                   {field: 'hname', title: 'Hospital Name'},
                   {field: 'pname', title: 'Program Name'},
                   {field: 'duration', title: 'Program Duration'},
-                  {field: 'specialty', title: 'Required Sepcialty'},
+                  {field: 'specialty', title: 'Required Specialty'},
                   {field: 'deadline', title: 'Application Deadline'},
                   {field: 'intvRound', title: 'Interview Round'},
                   {field: 'intvTime', title: 'Interview Date'},
@@ -81,11 +81,11 @@ function displayApplication() {
     success: function(res) {
       $('#app_table').bootstrapTable({
         columns: [
-            {field: 'postingID', title: 'Applied Posting ID'},
+            {field: 'postingID', title: 'Posting ID'},
             {field: 'name', title: 'Hospital Name'},
             {field: 'pname', title: 'Program Name'},
             {field: 'duration', title: 'Program Duration'},
-            {field: 'specialty', title: 'Required Sepcialty'},
+            {field: 'specialty', title: 'Required Specialty'},
             {field: 'time', title: 'Date Submitted'}
         ],
         data: res
@@ -115,6 +115,9 @@ function displayPostings() {
         ],
         data: res
       });
+        $('div.pull-left.pagination').css({'display': 'inline-block'});
+        $('div.pull-right.pagination-detail').css({'display': 'inline-block','position': 'absolute',  'right': '0px'});
+
     },
     error: function(err) {
       console.log(err);

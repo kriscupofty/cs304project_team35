@@ -125,7 +125,7 @@ module.exports = function () {
                 insert into Application (resEmail,postingID,docPath,time) values('jason@gmail.com', 2, 'Jason/package.zip','2017-04-17');
                 insert into Application (resEmail,postingID,docPath,time) values('ama@gmail.com', 6, 'Ama/package.zip','2017-12-03');
                 insert into Application (resEmail,postingID,docPath,time) values('ama@gmail.com', 12, 'Ama/package.zip','2017-06-04');
-                insert into Application (resEmail,postingID,docPath,time) values('linda@gmail.com', 9, 'Lindapackage.zip','2017-08-25');
+                insert into Application (resEmail,postingID,docPath,time) values('linda@gmail.com', 9, 'Linda/package.zip','2017-08-25');
                 insert into Application (resEmail,postingID,docPath,time) values('Jasmine@gmail.com', 3, 'Jasmine/package.zip','2017-04-28');
                 insert into Application (resEmail,postingID,docPath,time) values('kristy@gmail.com', 1, 'Kristy/package.zip','2017-01-22');
                 insert into Application (resEmail,postingID,docPath,time) values('meng@gmail.com', 7, 'Mengmeng/package.zip','2017-08-15');

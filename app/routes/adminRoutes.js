@@ -101,4 +101,19 @@ module.exports = function (app) {
             });
     });
 
+    app.get('/admin/edu_rates', auth, function (req, res) {
+        connection.query(`select s.sid AS sid, s.name AS sname, count(*) AS count
+                          from Offer o, CandidateAttended c, School s
+                          where o.resEmail = c.resEmail AND c.sid = s.sid
+                          group by s.sid`,
+            function (err, rows) {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send(err);
+                } else {
+                    res.status(200).send(rows);
+                }
+            });
+    });
+
 }

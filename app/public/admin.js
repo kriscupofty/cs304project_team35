@@ -6,7 +6,8 @@ $(document).ready(function () {
         type: "GET",
         success: function () {
             $('main.container').toggle();
-            displayChart();
+            displayOfferChart();
+            displayEduChart();
             displayOffers();
             displayMPC();
             displayMPH();
@@ -61,6 +62,7 @@ function displayOffers() {
             $('#offer_table').bootstrapTable({
                 columns: [{field: 'name', title: 'Resident'},
                     {field: 'resEmail', title: 'Resident Email'},
+                    {field: 'sname', title: 'School Name'},
                     {field: 'postingID', title: 'Posting ID'},
                     {field: 'hID', title: 'Hospital ID'},
                     {field: 'hospital', title: 'Hospital'},
@@ -137,7 +139,7 @@ function addOffer() {
     });
 }
 
-function displayChart() {
+function displayOfferChart() {
     $.ajax({
         url: "http://localhost:1234/admin/offer_rates",
         contentType: "application/json; charset=utf-8",
@@ -165,5 +167,36 @@ function displayChart() {
         error: function (err) {
             console.log(err);
         }
-    })
+    });
 }
+
+    function displayEduChart() {
+        $.ajax({
+            url: "http://localhost:1234/admin/edu_rates",
+            contentType: "application/json; charset=utf-8",
+            type: "GET",
+            success: function (res) {
+                var array = res.map((r) => {return [r.sname,r.count]});
+
+                google.charts.load("current", {packages:["corechart"]});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'School Name');
+                    data.addColumn('number', 'Count');
+                    data.addRows(array);
+
+                    var options = {
+                        pieHole: 0.25
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('edu_rates'));
+                    chart.draw(data, options);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+      }

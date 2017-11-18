@@ -254,5 +254,5 @@ async.waterfall([
         return;
     }
     console.log('Database Tables have been created');
-    require('./seed-db.js')();
+    //require('./seed-db.js')();
 });

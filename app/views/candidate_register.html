@@ -21,9 +21,9 @@
           <label>Name :</label>
           <input type="text" name="dname" id="name">
           <label>Email :</label>
-          <input type="text" name="demail" id="email">
+          <input type="email" name="demail" id="email">
           <label>Phone Number (optional) :</label>
-          <input type="text" name="dphone" id="phone">
+          <input type="tel" name="dphone" id="phone" pattern="\d{10}" placeholder="7786668798">
           <label>Password :</label>
           <input type="password" name="password" id="password" placeholder="at least 6 characters">
           <label>Confirm Password :</label>
@@ -35,7 +35,7 @@
           <select name="specialty" id="spec">
             <option value=" " >Please select your specialty</option>
             <option>Family Medicine</option>
-            <option>General Surgery'</option>
+            <option>General Surgery</option>
             <option>Neurology</option>
             <option>Dermatology</option>
             <option>Internal Medicine</option>
@@ -48,7 +48,11 @@
           </select>
         <div style="margin-top:20px;">
           <label>Employment Status (optional) :</label>
-          <input type="text" name="empl" id="empl">
+          <select name="employment" id="empl">
+            <option value=" " >Please select your employment status</option>
+            <option>employed</option>
+            <option>unemployed</option>
+          </select>
         </div>
         </div>
 

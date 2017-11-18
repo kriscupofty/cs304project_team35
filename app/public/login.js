@@ -33,6 +33,7 @@ function login() {
 
 function signup() {
   $.ajax({
+      url: "http://localhost:1234/register/",
       contentType: "text/html; charset=utf-8",
       type: "GET",
       success: function(res) {

@@ -39,7 +39,7 @@ div.main{
 }
 
 
-input[type=text],[type=password] {
+input[type=text],[type=password],[type=email],[type=tel] {
   width: 97.7%;
   height: 34px;
   padding-left: 5px;

@@ -7,7 +7,7 @@ const connection = require('./connection');
 const app = express(),
     session = require('express-session');
 
-require('./init-db');
+//require('./init-db');
 
 app.use(session({
     secret: 'yekterces',
@@ -69,6 +69,14 @@ app.get('/isloggedin/:role', function (req, res) {
         return res.status(401).send('Not loggied in');
 });
 
+// go to registration page endpoint
+app.get('/register', function (req, res) {
+    res.status(200).send('go to registration page');
+  });
+app.get('/register/:role', function (req, res) {
+      res.status(200).send('go to registration page for '+req.params.role);
+});
+
 // registration endpoint
 app.post('/register/:role', function (req, res) {  // request
     var role = req.params.role, query, data;
@@ -89,10 +97,16 @@ app.post('/register/:role', function (req, res) {  // request
         data = [req.body.name, req.body.email, req.body.phone, req.body.pw];
         insertData(query, data);
     } else if (role == 'recruiter') {
-        data = [req.body.name, rows[0].hID, req.body.email, req.body.phone, req.body.pw];
-        query = 'INSERT INTO Recruiter VALUES (?,?,?,?,?)';
-        insertData(query, data);
-
+      connection.query('select hID from Hospital where name=?', [req.body.hosp], function (err,rows) {
+          if (err) {
+              console.log(err);
+              res.status(400).send('Hospital ID Error');
+          } else {
+              data = [req.body.name, rows[0].hID, req.body.email, req.body.phone, req.body.pw];
+              query = 'INSERT INTO Recruiter VALUES (?,?,?,?,?)';
+              insertData(query, data);
+          }
+      });
     } else {
         data = [req.body.name, req.body.spec, req.body.empl, req.body.email, req.body.phone, req.body.pw];
         query = 'INSERT INTO ResidencyCandidate VALUES (?,?,?,?,?,?)';

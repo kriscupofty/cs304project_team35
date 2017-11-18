@@ -34,6 +34,22 @@ module.exports = function (app) {
       });
   });
 
+
+  app.post('/candidate/updateProfile', auth, function(req, res) {
+    connection.query(`update ResidencyCandidate set name = ?, phone = ?, specialty = ?, employmentStatus = ? where email = ?`, 
+    req.body.values,
+    function(err) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        } else {
+          console.log("success");
+          res.status(200).send("Profile updated successfully.");
+        }
+    });
+  });
+
+
   // candidate application endpoint
   app.get('/candidate/application', auth, function(req, res) {
     connection.query(`select A.postingID, H.name, VP.pname, VP.duration, VP.specialty, A.time from Application A, 

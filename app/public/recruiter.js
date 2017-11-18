@@ -80,7 +80,7 @@ function deletePosting() {
         alert("Please enter an ID of a posting posted by you.");
       },
       200: function(res) {
-        alert("Successfully deleted posting with postingID " + postID);
+        alert(res);
       }
     },
     error: function (err) {
@@ -108,7 +108,7 @@ function updatePname(){
         alert("Please enter an ID of a posting posted by you.");
       },
       200: function(res) {
-        alert("Successfully update program name of the posting with postingID " + postID);
+        alert(res);
       }
     },
     error: function (err) {
@@ -135,7 +135,7 @@ function updatePname(){
           alert("Please enter an ID of a posting posted by you.");
         },
         200: function(res) {
-          alert("Successfully update duration of the posting with postingID " + postID);
+          alert(res);
         }
       },
       error: function (err) {
@@ -163,7 +163,7 @@ function updatePname(){
             alert("Please enter an ID of a posting posted by you.");
           },
           200: function(res) {
-            alert("Successfully update specialty of the posting with postingID " + postID);
+            alert(res);
           }
         },
         error: function (err) {
@@ -191,7 +191,7 @@ function updatePname(){
             alert("Please enter an ID of a posting posted by you.");
           },
           200: function(res) {
-            alert("Successfully update deadline of the posting with postingID " + postID);
+            alert(res);
           }
         },
         error: function (err) {
@@ -219,7 +219,7 @@ function updatePname(){
             alert("Please enter an ID of a posting posted by you.");
           },
           200: function(res) {
-            alert("Successfully update #slots of the posting with postingID " + postID);
+            alert(res);
           }
         },
         error: function (err) {

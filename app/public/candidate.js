@@ -39,7 +39,7 @@ function displayAS(){
                   {field: 'specialty', title: 'Required Specialty'},
                   {field: 'deadline', title: 'Application Deadline'},
                   {field: 'intvRound', title: 'Interview Round'},
-                  {field: 'intvTime', title: 'Interview Date'},
+                  {field: 'intvTime', title: 'Interview Time'},
                   {field: 'intvLoc', title: 'Interview Location'}],
               data: res
           });
@@ -56,22 +56,70 @@ function displayProfile() {
     contentType: "application/json; charset=utf-8",
     type: "GET",
     success: function(res) {
-      $('#profile_table').bootstrapTable({
-        columns: [
-            {field:'name', title: 'Name'},
-            {field:'email', title: 'Email'},
-            {field:'phone', title: 'Phone', editable: true},
-            {field:'specialty', title: 'Specialty', editable: true},
-            {field:'employmentStatus', title: 'Employment Status', editable: true}
-        ],
-        data: res
-      });
+
+      $('#name').val(res[0].name);
+      $('#email').val(res[0].email);
+      $('#phone').val(res[0].phone);
+      $('#specialty').val(res[0].specialty);
+      $('#employmentStatus').val(res[0].employmentStatus);
+
     },
     error: function(err) {
       console.log(err);
     }
   });  
 }
+
+function editProfile() {
+  $('#name').attr("disabled", false);
+  //$('#email').attr("disabled", false);
+  $('#phone').attr("disabled", false);
+  $('#specialty').attr("disabled", false);
+  $('#employmentStatus').attr("disabled", false);
+}
+
+function updateProfile() {
+  var name = $('#name').val();
+  var email = $('#email').val();
+  var phone = $('#phone').val();
+  var specialty = $('#specialty').val();
+  var employmentStatus = $('#employmentStatus').val();
+  if (name == '' || email == '' || phone == '' || specialty == '' || employmentStatus == '') {
+    alert('Please enter all fields.');
+  }
+
+  var data = [name, phone, specialty, employmentStatus, email];
+
+  $.ajax({
+    url: "http://localhost:1234/candidate/updateProfile",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify({values: data}),
+    type: "POST",
+    success: function(res) {
+
+      $('#name').attr("disabled", true);
+      $('#email').attr("disabled", true);
+      $('#phone').attr("disabled", true);
+      $('#specialty').attr("disabled", true);
+      $('#employmentStatus').attr("disabled", true);
+      return alert(res);
+
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  }); 
+}
+
+$(document).ready(function()
+{
+  $("#fileuploader").uploadFile({
+  url:"YOUR_FILE_UPLOAD_URL",
+  fileName:"myfile"
+  });
+});
+
+
 
 function displayApplication() {
   $.ajax({

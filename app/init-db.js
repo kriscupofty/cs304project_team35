@@ -76,7 +76,7 @@ async.waterfall([
             `create table ResidencyCandidate (
                 name	          varchar(30) not null,
                 specialty	       varchar(50) not null,
-                employmentStatus	varchar(30),
+                employmentStatus	ENUM('employed', 'unemployed'),
                 email           varchar(30),
                 phone             varchar(30) unique,
                 pw               varchar(30) not null,
@@ -116,7 +116,7 @@ async.waterfall([
 	            round		int(11) unsigned,
                 aID			int(11) unsigned,
                 time        datetime not null,
-                location    varchar(30) not null,
+                location    varchar(60) not null,
                 primary key (aID,round),
 	            foreign key (aID) references Application(aID)
                 on delete cascade
@@ -168,7 +168,7 @@ async.waterfall([
                 postingID		int(11) unsigned not null,
 	            resEmail		varchar(30) not null,
                 compensation	numeric(9,2),
-                decision		varchar(30),
+                decision		ENUM('accepted', 'declined', 'pending'),
                 primary key (resEmail,postingID,compensation),
                 foreign key (resEmail) references ResidencyCandidate(email)
                 on delete cascade
@@ -254,5 +254,5 @@ async.waterfall([
         return;
     }
     console.log('Database Tables have been created');
-    //require('./seed-db.js')();
+    require('./seed-db.js')();
 });

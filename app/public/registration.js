@@ -7,17 +7,7 @@ $(document).ready(function() {
     if(checked == null)
     return alert("Please check the type of user you are.");
     let user = checked.value;
-    $.ajax({
-      url: "http://localhost:1234/register/" + user,
-      contentType: "text/html; charset=utf-8",
-      type: "GET",
-      success: function(res) {
-        window.location.href = "http://localhost:1234/" + user + "_register.html";
-      },
-      error: function (err) {
-        console.log(err);
-        alert(err.responseText);
-      }});
+    window.location = "/" + user + "_register.html";
     });
 
     $("#admin_register").click(function() {
@@ -89,18 +79,7 @@ $(document).ready(function() {
 
 
     $("#back").click(function() {
-      $.ajax({
-        url: "http://localhost:1234/register",
-        contentType: "text/html; charset=utf-8",
-        type: "GET",
-        success: function(res) {
-          window.location.href = "http://localhost:1234/register.html";
-        },
-        error: function (err) {
-          console.log(err);
-          alert(err.responseText);
-        }
-      });
+        window.location = "/register.html";
     });
 
     function commonCheck(name,email,phone,password,cpassword) {

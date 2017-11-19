@@ -67,7 +67,7 @@ function displayProfile() {
     error: function(err) {
       console.log(err);
     }
-  });  
+  });
 }
 
 function editProfile() {
@@ -75,19 +75,29 @@ function editProfile() {
   //$('#email').attr("disabled", false);
   $('#phone').attr("disabled", false);
   $('#specialty').attr("disabled", false);
+  $('#specialty').hide();
+  $('#newSpec').show();
   $('#employmentStatus').attr("disabled", false);
+  $('#employmentStatus').hide();
+  $('#newEmpl').show();
 }
 
 function updateProfile() {
   var name = $('#name').val();
   var email = $('#email').val();
   var phone = $('#phone').val();
-  var specialty = $('#specialty').val();
-  var employmentStatus = $('#employmentStatus').val();
-  if (name == '' || email == '' || phone == '' || specialty == '' || employmentStatus == '') {
+  var specialty = $("#spec option:selected").text();
+  var employmentStatus = $("#empl option:selected").text();
+  if (name == '' || email == '' || phone == '' || $("#spec option:selected").val() == " " || $("#empl option:selected").val() == " ") {
     alert('Please enter all fields.');
   }
-
+  if ($("#otherSpec").is(':visible')){
+    specialty = $("#nspec").val();
+    $('#otherSpec').hide();
+  } else $('#newSpec').hide();
+  $('#specialty').show();
+  $('#employmentStatus').show();
+  $('#newEmpl').hide();
   var data = [name, phone, specialty, employmentStatus, email];
 
   $.ajax({
@@ -102,17 +112,60 @@ function updateProfile() {
       $('#phone').attr("disabled", true);
       $('#specialty').attr("disabled", true);
       $('#employmentStatus').attr("disabled", true);
+      displayProfile();
       return alert(res);
 
     },
     error: function(err) {
       console.log(err);
     }
-  }); 
+  });
 }
+
+// function updateProfile() {
+//   var name = $('#name').val();
+//   var email = $('#email').val();
+//   var phone = $('#phone').val();
+//   var specialty = $('#specialty').val();
+//   var employmentStatus = $('#employmentStatus').val();
+//   if (name == '' || email == '' || phone == '' || specialty == '' || employmentStatus == '') {
+//     alert('Please enter all fields.');
+//   }
+//
+//   var data = [name, phone, specialty, employmentStatus, email];
+//
+//   $.ajax({
+//     url: "http://localhost:1234/candidate/updateProfile",
+//     contentType: "application/json; charset=utf-8",
+//     data: JSON.stringify({values: data}),
+//     type: "POST",
+//     success: function(res) {
+//
+//       $('#name').attr("disabled", true);
+//       $('#email').attr("disabled", true);
+//       $('#phone').attr("disabled", true);
+//       $('#specialty').attr("disabled", true);
+//       $('#employmentStatus').attr("disabled", true);
+//       return alert(res);
+//
+//     },
+//     error: function(err) {
+//       console.log(err);
+//     }
+//   });
+// }
 
 $(document).ready(function()
 {
+  $("#spec").change(function() {
+    if ($("#spec option:selected").val() === "other"){
+      $('#otherSpec').show();
+      $('#newSpec').hide();
+    } else {
+      $('#otherSpec').hide();
+      $('#newSpec').show();
+    }
+  });
   $("#fileuploader").uploadFile({
   url:"YOUR_FILE_UPLOAD_URL",
   fileName:"myfile"
@@ -142,7 +195,7 @@ function displayApplication() {
     error: function(err) {
       console.log(err);
     }
-  });  
+  });
 }
 
 function displayPostings() {
@@ -170,5 +223,5 @@ function displayPostings() {
     error: function(err) {
       console.log(err);
     }
-  }); 
+  });
 }

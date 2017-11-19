@@ -118,7 +118,26 @@
           <div class="col-lg-6">
             <div class="input-group">
               <span class="input-group-addon"> Specialty </span>
-              <input type="text" style="text-align: center" class="form-control" id="specialty" disabled>
+              <input type="text" style="text-align: center; display:block" class="form-control" id="specialty" disabled>
+              <div id="newSpec" style='text-align: center; display:none'  class="form-control">
+              <select name="specialty" id="spec">
+                <option value=" " >Please select your specialty</option>
+                <option>Family Medicine</option>
+                <option>General Surgery</option>
+                <option>Neurology</option>
+                <option>Dermatology</option>
+                <option>Internal Medicine</option>
+                <option>Neurosurgery</option>
+                <option>Emergency Medicine</option>
+                <option>Anesthesiology</option>
+                <option>Interventional Radiology</option>
+                <option>Ophthalmology</option>
+                <option value="other">Other</option>
+              </select>
+              </div>
+              <div id="otherSpec" style='text-align: center; display:none;' class="form-control">
+                <input type="text" name="nspec" id="nspec">
+              </div>
             </div>
           </div>
         </div>
@@ -130,6 +149,13 @@
             <div class="input-group">
               <span class="input-group-addon"> Employment Status </span>
               <input type="text" style="text-align: center" class="form-control" id="employmentStatus" disabled>
+              <div id="newEmpl" style='text-align: center; display:none'  class="form-control">
+                <select name="employment" id="empl">
+                  <option value=" " >Please select your employment status</option>
+                  <option>employed</option>
+                  <option>unemployed</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -148,13 +174,13 @@
         <div id="fileuploader">Upload</div>
 
 
-    </div> 
+    </div>
 
     <div id="jobPosting" class="section">
         <h3>Vacancy Postings</h3><hr>
         <table id="posting_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5" data-search='true'>
         </table>
-    </div> 
+    </div>
 
     <div id='application' class="section">
         <h3>Applications</h3><hr>

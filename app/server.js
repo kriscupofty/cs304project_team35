@@ -90,6 +90,7 @@ app.post('/register/:role', function (req, res) {  // request
         data = [req.body.email, req.body.name, req.body.phone, req.body.pw];
         insertData(query, data);
     } else if (role == 'recruiter') {
+      if (Object.keys(req.body).length === 5) {
         connection.query('select hID from Hospital where name=?', [req.body.hosp], function (err, rows) {
             if (err) {
                 console.log(err);
@@ -100,6 +101,25 @@ app.post('/register/:role', function (req, res) {  // request
                 insertData(query, data);
             }
         });
+      } else {
+        connection.query('insert into Hospital (name,location) values(?,?);', [req.body.hname,req.body.hloc],
+        function (err, rows) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+              connection.query('select hID from Hospital where name=?', [req.body.hname], function (err, rows) {
+                  if (err) {
+                      console.log(err);
+                      res.status(400).send(err);
+                  } else {
+                      data = [req.body.name, rows[0].hID, req.body.email, req.body.phone, req.body.pw];
+                      query = 'INSERT INTO Recruiter VALUES (?,?,?,?,?)';
+                      insertData(query, data);
+                  }
+              });
+            }});
+      }
     } else {
         data = [req.body.name, req.body.spec, req.body.empl, req.body.email, req.body.phone, req.body.pw];
         query = 'INSERT INTO ResidencyCandidate VALUES (?,?,?,?,?,?)';

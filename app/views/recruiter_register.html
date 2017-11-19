@@ -44,11 +44,19 @@
             <option>Alberta Hospital Edmonton</option>
             <option>Cross Cancer Institute</option>
             <option>Devon General Hospital</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
+        <div id="newHosp" style='display:none;'>
+          <label>Hospital Name :</label>
+          <input type="text" name="hname" id="hname">
+          <label>Hospital Location :</label>
+          <input type="text" name="hloc" id="hloc">
+        </div>
+
         <input type="button" name="register" id="recr_register" value="Register">
-        <input type="button" id="back" value="Back">
+        <input type="button"  onclick="window.location = '/register.html'" id="back" value="Back">
 
       </form>
     </div>

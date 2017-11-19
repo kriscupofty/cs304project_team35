@@ -63,6 +63,12 @@ $(document).ready(function() {
       request(user,data);
     }});
 
+    $("#spec").change(function() {
+      if ($("#spec option:selected").val() === "other"){
+        $('#newSpec').show();
+      } else $('#newSpec').hide();
+    });
+
     $("#cand_register").click(function() {
       var name = $("#name").val();
       var email = $("#email");
@@ -82,6 +88,9 @@ $(document).ready(function() {
             return alert('Please enter a valid phone number!');
           }
           if ($("#empl option:selected").val() === " ") empl = null;
+          if ($("#spec option:selected").val() === "other"){
+            spec = $("#nspec").val();
+          }
           var data = {name: name, email: email.val(), phone: phone, pw: password, spec: spec, empl: empl};
           request(user,data)
         }}});

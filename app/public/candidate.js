@@ -122,39 +122,6 @@ function updateProfile() {
   });
 }
 
-// function updateProfile() {
-//   var name = $('#name').val();
-//   var email = $('#email').val();
-//   var phone = $('#phone').val();
-//   var specialty = $('#specialty').val();
-//   var employmentStatus = $('#employmentStatus').val();
-//   if (name == '' || email == '' || phone == '' || specialty == '' || employmentStatus == '') {
-//     alert('Please enter all fields.');
-//   }
-//
-//   var data = [name, phone, specialty, employmentStatus, email];
-//
-//   $.ajax({
-//     url: "http://localhost:1234/candidate/updateProfile",
-//     contentType: "application/json; charset=utf-8",
-//     data: JSON.stringify({values: data}),
-//     type: "POST",
-//     success: function(res) {
-//
-//       $('#name').attr("disabled", true);
-//       $('#email').attr("disabled", true);
-//       $('#phone').attr("disabled", true);
-//       $('#specialty').attr("disabled", true);
-//       $('#employmentStatus').attr("disabled", true);
-//       return alert(res);
-//
-//     },
-//     error: function(err) {
-//       console.log(err);
-//     }
-//   });
-// }
-
 $(document).ready(function()
 {
   $("#spec").change(function() {

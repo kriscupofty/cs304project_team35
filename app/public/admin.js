@@ -28,7 +28,7 @@ $(document).ready(function () {
 
 function setUpInterview() {
     var round = $('#round').val(), aID = $('#aID').val(), time = $('#time').val(), location = $('#loc').val();
-    if (round == null || aID == null || time == null || location == null)
+    if (round == '' || aID == '' || time == '' || location == '')
         return alert('Please enter all fields.');
 
     var data = [parseInt(round), parseInt(aID), time, location];
@@ -42,7 +42,7 @@ function setUpInterview() {
         },
         error: function (err) {
             //console.log(err);
-            if (err.responseJSON.errno == 1462)
+            if (err.responseJSON.errno == 1452)
                 return alert("Please enter a valid aID.");
             else if (err.responseJSON.errno == 1062)
                 return alert("Interview already set up.");

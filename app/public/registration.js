@@ -29,18 +29,18 @@ $(document).ready(function() {
       var iden = $("#secret").val();
       var user = "admin";
       if (commonCheck(name,email,phone,password,cpassword)===true) {
-      if (iden !== "8888") {
-        alert("You failed to verify yourself as an administrator!");
-      } else {
-        if (phone.length === 0) {
-          phone = null;
-        } else if ($("#phone").is(':invalid')){
-          return alert('Please enter a valid phone number!');
-         }
-        var data = {name: name, email: email.val(), phone: phone, pw: password};
-        request(user,data);
+        if (iden !== "8888") {
+          alert("You failed to verify yourself as an administrator!");
+        } else {
+          if (phone.length === 0) {
+            phone = null;
+          } else if ($("#phone").is(':invalid')){
+            return alert('Please enter a valid phone number!');
+          }
+          var data = {email: email.val(), name: name, phone: phone, pw: password};
+          request(user,data);
+        }
       }
-    }
     });
 
     $("#recr_register").click(function() {
@@ -52,54 +52,54 @@ $(document).ready(function() {
       var hosp = $("#hosp option:selected").text();
       var user = "recruiter";
       if (commonCheck(name,email,phone,password,cpassword)===true) {
-      if ($("#hosp option:selected").val() === " ") {
-        alert("Please select the hospital you are woking for!");
-      } else {
-        if (phone.length === 0) {
-          phone = null;
-        } else if ($("#phone").is(':invalid')){
-          return alert('Please enter a valid phone number!');
-         }
-        var data = {name: name, email: email.val(), phone: phone, pw: password, hosp: hosp};
-        request(user,data);
-      }}});
+        if ($("#hosp option:selected").val() === " ") {
+          alert("Please select the hospital you are woking for!");
+        } else {
+          if (phone.length === 0) {
+            phone = null;
+          } else if ($("#phone").is(':invalid')){
+            return alert('Please enter a valid phone number!');
+          }
+          var data = {name: name, email: email.val(), phone: phone, pw: password, hosp: hosp};
+          request(user,data);
+        }}});
 
-      $("#cand_register").click(function() {
-        var name = $("#name").val();
-        var email = $("#email");
-        var phone = $("#phone").val();
-        var password = $("#password").val();
-        var cpassword = $("#cpassword").val();
-        var empl = $("#empl option:selected").text();
-        var spec = $("#spec option:selected").text();
-        var user = "candidate";
+    $("#cand_register").click(function() {
+      var name = $("#name").val();
+      var email = $("#email");
+      var phone = $("#phone").val();
+      var password = $("#password").val();
+      var cpassword = $("#cpassword").val();
+      var empl = $("#empl option:selected").text();
+      var spec = $("#spec option:selected").text();
+      var user = "candidate";
       if (commonCheck(name,email,phone,password,cpassword)===true) {
         if ($("#spec option:selected").val() === " ")
-          alert("Please select your specialty!");
-         else {
-           if (phone.length === 0) {
-             phone = null;
-           } else if ($("#phone").is(':invalid')){
-             return alert('Please enter a valid phone number!');
-            }
+        alert("Please select your specialty!");
+        else {
+          if (phone.length === 0) {
+            phone = null;
+          } else if ($("#phone").is(':invalid')){
+            return alert('Please enter a valid phone number!');
+          }
           if ($("#empl option:selected").val() === " ") empl = null;
           var data = {name: name, email: email.val(), phone: phone, pw: password, spec: spec, empl: empl};
-        request(user,data)
-      }}});
+          request(user,data)
+        }}});
 
 
     $("#back").click(function() {
       $.ajax({
-          url: "http://localhost:1234/register",
-          contentType: "text/html; charset=utf-8",
-          type: "GET",
-          success: function(res) {
-              window.location.href = "http://localhost:1234/register.html";
-          },
-          error: function (err) {
-              console.log(err);
-              alert(err.responseText);
-          }
+        url: "http://localhost:1234/register",
+        contentType: "text/html; charset=utf-8",
+        type: "GET",
+        success: function(res) {
+          window.location.href = "http://localhost:1234/register.html";
+        },
+        error: function (err) {
+          console.log(err);
+          alert(err.responseText);
+        }
       });
     });
 
@@ -134,9 +134,10 @@ $(document).ready(function() {
           alert('Successfully signed up!')
         },
         error: function (err) {
-          console.log(err);
-          alert(err.responseText);
+          if (err.responseJSON.errno == 1062)
+              return alert("Email already used for registration.");
+          else return alert(err.responseText);
         }
       });
     }
-});
+  });

@@ -133,8 +133,9 @@ $(document).ready(function()
       $('#newSpec').show();
     }
   });
+
   $("#fileuploader").uploadFile({
-  url:"YOUR_FILE_UPLOAD_URL",
+  url:"/packages/",
   fileName:"myfile"
   });
 });
@@ -165,6 +166,30 @@ function displayApplication() {
   });
 }
 
+function addAppl() {
+    var postID = $('#postID').val(), docPath = "/packages/";
+    var d = new Date();
+    var time = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+    if (postID == '')
+        return alert('Please enter all fields.');
+    data={postID: postID, docPath: docPath, time: time};
+    $.ajax({
+        url: "http://localhost:1234/candidate/addApplication",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        type: "POST",
+        success: function () {
+            alert("Applied successfully.");
+        },
+        error: function (err) {
+            if (err.responseJSON.errno == 1452)
+                return alert("Please enter a valid postig ID.");
+            else if (err.responseJSON.errno == 1062)
+                return alert("Already applied");
+            else return alert(err.responseJSON.code);
+        }
+    });
+}
 function displayPostings() {
   $.ajax({
     url: "http://localhost:1234/candidate/postings",
@@ -172,7 +197,7 @@ function displayPostings() {
     type: "GET",
     success: function(res) {
       $('#posting_table').bootstrapTable({
-        columns: [
+        columns: [{field: 'postingID', title: 'Posting ID'},
             {field: 'name', title: 'Hospital Name'},
             {field: 'pname', title: 'Program Name'},
             {field: 'duration', title: 'Program Duration'},

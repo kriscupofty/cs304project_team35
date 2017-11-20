@@ -170,9 +170,6 @@
         </div>
 
         <br>
-        <h4>Upload your resume</h4>
-        <div id="fileuploader">Upload</div>
-
 
     </div>
 
@@ -186,6 +183,18 @@
         <h3>Applications</h3><hr>
         <table id="app_table" style="font-size: 0.9rem" data-pagination="true" data-page-size="5">
         </table>
+        <h3 style="margin-top: 20px">Add an application</h3>
+          <form class="form-inline">
+              <div style="margin-right: -90px" class="form-group">
+                  <label class="control-label">Posting ID</label>
+                  <input type="number" min="1" step="1" style="width: 40%" class="form-control requiredField" id="postID" name="postID" placeholder="integer">
+              </div>
+              <div class="form-group">
+                Upload your application package
+                <div style="margin-right:30px; magin-left:20px" id="fileuploader">Upload</div>
+                <button type="button" onclick="addAppl()" class="btn btn-primary">Apply</button>
+              </div>
+          </form>
     </div>
 
     <div id="interview" class="section">

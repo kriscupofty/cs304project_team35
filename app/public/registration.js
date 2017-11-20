@@ -32,6 +32,21 @@ $(document).ready(function() {
       }
     }
   });
+
+  $.ajax({
+    type : "get",
+    url : "http://localhost:1234/recruiter_register",
+    dataType : "json",
+    async : false,
+    success : function(res) {
+      for(var i=0;i<res.length;i++){
+        $("#hosp").append("<option>"+res[i].name+"</option>")
+      }
+    },
+    error: function (err) {
+      return alert(err.responseText);
+  }});
+
   $("#hosp").change(function() {
     if ($("#hosp option:selected").val() === "other"){
       $('#newHosp').show();

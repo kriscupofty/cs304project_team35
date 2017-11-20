@@ -69,6 +69,17 @@ app.get('/isloggedin/:role', function (req, res) {
         return res.status(401).send('Not loggied in');
 });
 
+// hospital list endpoint
+app.get('/recruiter_register', function(req, res) {
+  connection.query('select name from Hospital', function (err, rows) {
+      if (err) {
+          console.log(err);
+          res.status(400).send(err);
+      } else {
+          res.status(200).send(rows);
+      }
+  });
+});
 
 // registration endpoint
 app.post('/register/:role', function (req, res) {  // request

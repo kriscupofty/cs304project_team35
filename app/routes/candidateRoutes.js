@@ -1,7 +1,8 @@
 /**
  * Created by kristys on 2017-11-12.
  */
-const connection = require('../connection');
+const connection = require('../connection'),
+        uuidv4 = require('uuid/v4');
 
 module.exports = function (app) {
 
@@ -65,18 +66,39 @@ module.exports = function (app) {
       });
   });
 
-  // add an application endpoint
-  app.post('/candidate/addApplication', auth, function (req, res) {
-    var data = [req.session.email, req.body.postID, req.body.docPath, req.body.time];
-    connection.query('insert into Application (resEmail,postingID,docPath,time) values (?, ?, ?, ?)',
-    data, function (err, rows) {
-      if (err) {
-        console.log(err);
-        res.status(400).send(err);
-      } else {
-        res.status(200).send(rows);
-      }
-    });
+
+//upload application package and insert into Application
+  app.post('/candidate/uploadApplication', auth, function (req, res) {
+      if (!req.files)
+          return res.status(400).send('No files were uploaded.');
+
+      //console.log(req);
+      let appFile = req.files.appFile;
+
+      var ext = appFile.name.split(".")[1];
+      if(ext !== 'zip')
+          res.status(400).send("Please submit zip file only.");
+      var filename = uuidv4() + "." + ext;
+
+      // Use the mv() method to place the file somewhere on your server
+      appFile.mv(__dirname + '/../uploads/' + filename, function(err) {
+          if (err)
+              return res.status(500).send(err);
+
+          var d = new Date();
+          var time = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+
+          var data = [req.session.email, req.body.postID, filename, time];
+          connection.query('insert into Application (resEmail,postingID,docPath,time) values (?, ?, ?, ?)',
+              data, function (err) {
+                  if (err) {
+                      console.log(err);
+                      res.status(400).send(err);
+                  } else {
+                      res.status(200).send("Application submitted!");
+                  }
+              });
+      });
   });
 
   // display all postings endpoint

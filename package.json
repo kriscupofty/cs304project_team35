@@ -11,8 +11,10 @@
     "async": "^2.5.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-fileupload": "^0.3.0",
     "express-session": "^1.15.6",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -5,7 +5,8 @@
 const express = require('express');
 const connection = require('./connection');
 const app = express(),
-    session = require('express-session');
+    session = require('express-session'),
+    fileUpload = require('express-fileupload');
 
 //require('./init-db');
 
@@ -18,6 +19,7 @@ app.use(session({
 app.set('views', './views');
 app.use('/', express.static(__dirname + '/views'));
 app.use('/public', express.static(__dirname + '/public'));
+app.use(fileUpload());
 app.use(require('body-parser').json());
 
 // Include all Routes

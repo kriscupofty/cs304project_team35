@@ -22,6 +22,41 @@ $(document).ready(function () {
         $(".nav-link.active").removeClass("active");
         $(this).addClass("active");
     });
+
+    $("#spec").change(function() {
+        if ($("#spec option:selected").val() === "other"){
+            $('#otherSpec').show();
+            $('#newSpec').hide();
+        } else {
+            $('#otherSpec').hide();
+            $('#newSpec').show();
+        }
+    });
+
+    $('#appForm').submit(function(e) {
+        e.preventDefault();
+
+        var form = new FormData($("#appForm")[0]);
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            dataType: 'json',
+            data: form,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+                return alert(res.responseText);
+            },
+            error: function(err) {
+                console.log(err);
+                if(err.responseJSON !== undefined) {
+                    if (err.responseJSON.errno == 1452)
+                        return alert("Please enter a valid posting ID.");
+                } else return alert(err.responseText);
+            }
+        });
+
+    });
 });
 
 function displayAS(){
@@ -122,26 +157,6 @@ function updateProfile() {
   });
 }
 
-$(document).ready(function()
-{
-  $("#spec").change(function() {
-    if ($("#spec option:selected").val() === "other"){
-      $('#otherSpec').show();
-      $('#newSpec').hide();
-    } else {
-      $('#otherSpec').hide();
-      $('#newSpec').show();
-    }
-  });
-
-  $("#fileuploader").uploadFile({
-  url:"/packages/",
-  fileName:"myfile"
-  });
-});
-
-
-
 function displayApplication() {
   $.ajax({
     url: "http://localhost:1234/candidate/application",
@@ -166,30 +181,6 @@ function displayApplication() {
   });
 }
 
-function addAppl() {
-    var postID = $('#postID').val(), docPath = "/packages/";
-    var d = new Date();
-    var time = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
-    if (postID == '')
-        return alert('Please enter all fields.');
-    data={postID: postID, docPath: docPath, time: time};
-    $.ajax({
-        url: "http://localhost:1234/candidate/addApplication",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        type: "POST",
-        success: function () {
-            alert("Applied successfully.");
-        },
-        error: function (err) {
-            if (err.responseJSON.errno == 1452)
-                return alert("Please enter a valid postig ID.");
-            else if (err.responseJSON.errno == 1062)
-                return alert("Already applied");
-            else return alert(err.responseJSON.code);
-        }
-    });
-}
 function displayPostings() {
   $.ajax({
     url: "http://localhost:1234/candidate/postings",
